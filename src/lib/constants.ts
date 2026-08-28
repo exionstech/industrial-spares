@@ -11,18 +11,18 @@ export const BRAND_INFO = {
 };
 
 export const IMAGES = {
-  logo: "https://framerusercontent.com/images/89Bw1SUJN6l6dCYPaK2kgonGcY.png",
-  heroBg: "https://framerusercontent.com/images/WvGdIGyATWIlEz7kZUiQLgQ1U.png",
-  cert1: "https://framerusercontent.com/images/Ai3HZn7GbIZ0RccOeeLvy7QDq1I.png",
-  cert2: "https://framerusercontent.com/images/u3WkuxjeJSdVqlav0VVymBPxUYA.png",
-  cert3: "https://framerusercontent.com/images/4lsaKj9dacZrVZ6wxPJtKuJPSI.png",
-  shaftCollars: "https://framerusercontent.com/images/7NK8fGuyqF3aF57JhRu3voq3as.jpg",
-  couplings: "https://framerusercontent.com/images/2Z9NNE37lFh4DbRfaqWXEtpLg.jpg",
-  cncComponents: "https://framerusercontent.com/images/wB1KiLMHIYo09P80qNe31sCC3Ok.jpg",
-  sprockets: "https://framerusercontent.com/images/YXBuRm7MJWyhtTHo8eowKlJN3Y.jpg",
-  valves: "https://framerusercontent.com/images/DPBbZ84YG3OVXfnNsR7VjWX7WL0.jpg",
-  otherMachineParts: "https://framerusercontent.com/images/t19XdPCjkGMjuCR75bZgJuyUSnY.jpg",
-  contactEngineer: "https://framerusercontent.com/images/ctUfi20e5c3UghihvWBXApxVG6c.png",
+  logo: "/assets/brand/logo.png",
+  heroBg: "/assets/hero/hero-bg.png",
+  cert1: "/assets/brand/cert-iso-1.png",
+  cert2: "/assets/brand/cert-iso-2.png",
+  cert3: "/assets/brand/cert-iso-3.png",
+  shaftCollars: "/assets/products/shaft-collars.jpg",
+  couplings: "/assets/products/couplings.jpg",
+  cncComponents: "/assets/products/cnc-components.jpg",
+  sprockets: "/assets/products/sprockets.jpg",
+  valves: "/assets/products/valves.jpg",
+  otherMachineParts: "/assets/products/other-machine-parts.jpg",
+  contactEngineer: "/assets/team/contact-engineer.png",
 };
 
 export const NAV_LINKS = [
