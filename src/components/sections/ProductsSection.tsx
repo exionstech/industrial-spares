@@ -1,225 +1,156 @@
-"use client";
-
-import { Check } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import type React from "react";
-import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CORE_PRODUCTS, MATERIALS, OTHER_PRODUCTS } from "@/lib/constants";
+import { SectionEyebrow } from "@/components/ui/section-eyebrow";
+import { catalogueScrollRouteFor } from "@/lib/constants";
+import { CORE_PRODUCTS, MATERIALS, OTHER_PRODUCTS } from "@/lib/product-catalogue";
 
-interface ProductsSectionProps {
-  onOpenQuoteModal: (productName?: string) => void;
+type CoreProduct = (typeof CORE_PRODUCTS)[number];
+
+interface CoreProductCardProps {
+  product: CoreProduct;
+  imageAlt: string;
+  /* The second core card mirrors the first: copy left, photo right. */
+  reversed?: boolean;
 }
 
-export const ProductsSection: React.FC<ProductsSectionProps> = ({ onOpenQuoteModal }) => {
-  const [selectedMaterial, setSelectedMaterial] = useState<string | null>(null);
+const CoreProductCard: React.FC<CoreProductCardProps> = ({
+  product,
+  imageAlt,
+  reversed = false,
+}) => (
+  <div className="grid grid-cols-1 border border-brand-line bg-white lg:grid-cols-2">
+    {/* Photo half with floating tag chips */}
+    <div
+      className={`relative min-h-[320px] overflow-hidden bg-brand-dark sm:min-h-[440px] lg:min-h-[440px] ${
+        reversed ? "lg:order-2" : ""
+      }`}
+    >
+      <Image
+        src={product.image}
+        alt={imageAlt}
+        fill
+        sizes="(max-width: 1024px) 100vw, 50vw"
+        className="object-cover object-center"
+        unoptimized
+      />
+    </div>
 
-  const handleMaterialClick = (material: string) => {
-    if (selectedMaterial === material) {
-      setSelectedMaterial(null);
-    } else {
-      setSelectedMaterial(material);
-    }
-  };
+    {/* Copy half */}
+    <div className={`flex flex-col p-8 lg:p-10 ${reversed ? "lg:order-1" : ""}`}>
+      <h3 className="font-medium text-3xl text-brand-dark tracking-tight">{product.title}</h3>
+      <p className="mt-4 text-brand-muted text-[15px] leading-[1.65]">{product.description}</p>
 
+      <div className="mt-8">
+        {product.features.map((feat) => (
+          <div
+            key={feat.title}
+            className="flex items-start gap-3 border-brand-bg-light border-b py-3.5"
+          >
+            <span className="mt-[7px] h-1.5 w-1.5 flex-shrink-0 bg-brand-red" />
+            <div>
+              <h4 className="text-brand-dark text-sm">{feat.title}</h4>
+              <p className="mt-0.5 text-brand-muted text-[15px]">{feat.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-8">
+        <Button
+          className="w-fit justify-center px-3 text-xs tracking-[0.06em] sm:px-6 sm:text-sm sm:tracking-[0.08em]"
+          href={catalogueScrollRouteFor(product.title)}
+          variant="primary"
+          size="cta"
+        >
+          {product.ctaText}
+        </Button>
+      </div>
+    </div>
+  </div>
+);
+
+export const ProductsSection: React.FC = () => {
   return (
-    <section id="products" className="bg-brand-bg-light py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-16">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-gray-300">
+    <section
+      id="products"
+      className="scroll-mt-[68px] lg:scroll-mt-[92px] border-brand-line border-b bg-brand-bg-light pt-10 pb-[96px] lg:pt-[93px]"
+    >
+      <div className="mx-auto max-w-shell px-4 sm:px-8">
+        {/* Section header */}
+        <div className="flex flex-col gap-6 text-center lg:grid lg:grid-cols-[1fr_440px] lg:items-start lg:text-left">
           <div>
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-red block mb-1">
+            <SectionEyebrow className="justify-center lg:justify-start">
               Core Products
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+            </SectionEyebrow>
+            <h2 className="mt-3 font-medium text-[30px] text-brand-dark tracking-tight sm:text-5xl">
               What we manufacture
             </h2>
           </div>
-          <p className="text-sm sm:text-base text-gray-600 max-w-md">
+          <p className="mx-auto max-w-[320px] text-brand-muted text-[15px] leading-[1.65] lg:mx-0 lg:pt-2">
             Shaft Collars and Couplings are our primary product families - manufactured to
             international standards since 1993.
           </p>
         </div>
 
-        {/* Feature Product 1: Shaft Collars */}
-        <div className="bg-white shadow-xl overflow-hidden grid grid-cols-1 lg:grid-cols-2">
-          {/* Image & Floating Badges */}
-          <div className="relative min-h-[350px] sm:min-h-[420px] bg-brand-dark overflow-hidden group">
-            <Image
-              src={CORE_PRODUCTS[0].image}
-              alt="Precision Machined Shaft Collars"
-              fill
-              className="object-cover object-center opacity-85 group-hover:scale-105 transition-transform duration-500"
-              unoptimized
-            />
-            {/* Floating Tags Overlay */}
-            <div className="absolute bottom-6 left-6 flex flex-wrap gap-2 z-10">
-              {CORE_PRODUCTS[0].badges.map((badge) => (
-                <Badge key={badge}>{badge}</Badge>
-              ))}
-            </div>
-          </div>
-
-          {/* Details & Specs */}
-          <div className="p-8 lg:p-12 flex flex-col justify-between space-y-6">
-            <div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
-                {CORE_PRODUCTS[0].title}
-              </h3>
-              <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-6">
-                {CORE_PRODUCTS[0].description}
-              </p>
-
-              {/* Bullet Features */}
-              <div className="space-y-4 border-t border-gray-100 pt-6">
-                {CORE_PRODUCTS[0].features.map((feat) => (
-                  <div key={feat.title} className="flex items-start gap-3">
-                    <span className="w-2 h-2 rounded-full bg-brand-red mt-2 flex-shrink-0" />
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-900">{feat.title}</h4>
-                      <p className="text-xs text-gray-500">{feat.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="pt-4">
-              <Button onClick={() => onOpenQuoteModal("Shaft Collars")} variant="primary">
-                {CORE_PRODUCTS[0].ctaText}
-              </Button>
-            </div>
-          </div>
+        {/* Core product cards */}
+        <div className="mt-20 space-y-6">
+          <CoreProductCard product={CORE_PRODUCTS[0]} imageAlt="Precision machined shaft collars" />
+          <CoreProductCard
+            product={CORE_PRODUCTS[1]}
+            imageAlt="Precision machined couplings"
+            reversed
+          />
         </div>
 
-        {/* Feature Product 2: Couplings */}
-        <div className="bg-white shadow-xl overflow-hidden grid grid-cols-1 lg:grid-cols-2">
-          {/* Details & Specs (Left on desktop) */}
-          <div className="p-8 lg:p-12 flex flex-col justify-between space-y-6 order-2 lg:order-1">
-            <div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
-                {CORE_PRODUCTS[1].title}
-              </h3>
-              <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-6">
-                {CORE_PRODUCTS[1].description}
-              </p>
+        {/* Other machine parts */}
+        <div className="mt-[72px]">
+          <SectionEyebrow tone="muted">Other Products</SectionEyebrow>
+          <h3 className="mt-2 font-medium text-brand-dark text-lg">
+            Other machine parts we manufacture
+          </h3>
 
-              {/* Bullet Features */}
-              <div className="space-y-4 border-t border-gray-100 pt-6">
-                {CORE_PRODUCTS[1].features.map((feat) => (
-                  <div key={feat.title} className="flex items-start gap-3">
-                    <span className="w-2 h-2 rounded-full bg-brand-red mt-2 flex-shrink-0" />
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-900">{feat.title}</h4>
-                      <p className="text-xs text-gray-500">{feat.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="pt-4">
-              <Button onClick={() => onOpenQuoteModal("Couplings")} variant="primary">
-                {CORE_PRODUCTS[1].ctaText}
-              </Button>
-            </div>
-          </div>
-
-          {/* Image & Floating Badges (Right on desktop) */}
-          <div className="relative min-h-[350px] sm:min-h-[420px] bg-brand-dark overflow-hidden group order-1 lg:order-2">
-            <Image
-              src={CORE_PRODUCTS[1].image}
-              alt="Precision Machined Couplings"
-              fill
-              className="object-cover object-center opacity-85 group-hover:scale-105 transition-transform duration-500"
-              unoptimized
-            />
-            {/* Floating Tags Overlay */}
-            <div className="absolute bottom-6 right-6 flex flex-wrap gap-2 z-10">
-              {CORE_PRODUCTS[1].badges.map((badge) => (
-                <Badge key={badge}>{badge}</Badge>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Other Machine Parts We Manufacture */}
-        <div className="space-y-8 pt-8">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-widest text-gray-500 block mb-1">
-              Other Products
-            </span>
-            <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
-              Other machine parts we manufacture
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="mt-11 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {OTHER_PRODUCTS.map((prod) => (
-              <div
+              <Link
                 key={prod.id}
-                onClick={() => onOpenQuoteModal(prod.title)}
-                className="bg-white shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer group border border-gray-100 flex flex-col justify-between"
+                href={catalogueScrollRouteFor(prod.title)}
+                className="group block border border-brand-line bg-white text-left transition-colors hover:border-brand-red"
               >
-                <div className="relative h-44 bg-brand-dark overflow-hidden">
+                <div className="relative h-36 overflow-hidden bg-brand-dark">
                   <Image
                     src={prod.image}
                     alt={prod.title}
                     fill
-                    className="object-cover opacity-75 group-hover:opacity-90 group-hover:scale-105 transition-all duration-300"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
                     unoptimized
                   />
                 </div>
-                <div className="p-5 space-y-2">
-                  <h4 className="text-base font-bold text-gray-900 group-hover:text-brand-red transition-colors">
+                <div className="px-4 py-3.5">
+                  <h4 className="text-brand-dark text-sm transition-colors group-hover:text-brand-red">
                     {prod.title}
                   </h4>
-                  <p className="text-xs text-gray-600 line-clamp-2">{prod.description}</p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
 
-        {/* Materials Available Filter */}
-        <div className="bg-white p-6 sm:p-8 shadow-md border border-gray-200 space-y-4">
-          <div className="flex items-center justify-between">
-            <h4 className="text-sm sm:text-base font-bold uppercase tracking-wider text-gray-900">
-              Materials &amp; Finishes Available
-            </h4>
-            {selectedMaterial && (
-              <button
-                type="button"
-                onClick={() => setSelectedMaterial(null)}
-                className="text-xs font-semibold text-brand-red hover:underline"
-              >
-                Clear Filter
-              </button>
-            )}
-          </div>
-          <div className="flex flex-wrap items-center gap-3">
+        {/* Materials strip */}
+        <div className="mt-6 border border-brand-line bg-white p-5">
+          <h4 className="text-brand-muted text-sm uppercase tracking-[0.18em]">
+            Materials Available
+          </h4>
+          <div className="mt-3 flex flex-wrap items-center gap-1.5">
             {MATERIALS.map((mat) => (
-              <Badge
-                key={mat}
-                variant="pill"
-                active={selectedMaterial === mat}
-                onClick={() => handleMaterialClick(mat)}
-              >
-                <span className="flex items-center gap-1.5">
-                  {selectedMaterial === mat && <Check className="w-3.5 h-3.5" />}
-                  <span>{mat}</span>
-                </span>
+              <Badge key={mat} variant="outline">
+                {mat}
               </Badge>
             ))}
           </div>
-          {selectedMaterial && (
-            <p className="text-xs text-gray-500 pt-2 italic">
-              Showing availability for{" "}
-              <span className="font-semibold text-gray-800">{selectedMaterial}</span> across all
-              shaft collars, couplings, and custom CNC parts.
-            </p>
-          )}
         </div>
       </div>
     </section>

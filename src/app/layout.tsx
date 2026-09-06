@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
+import { HashScroll } from "@/components/ui/hash-scroll";
 
-const inter = Inter({
+const manrope = Manrope({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-manrope",
   display: "swap",
 });
 
@@ -32,8 +33,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`scroll-smooth ${inter.variable}`}>
-      <body className="bg-white text-gray-900 font-sans antialiased selection:bg-brand-red selection:text-white">
+    <html lang="en" className={`scroll-smooth ${manrope.variable}`}>
+      <body className="bg-white text-gray-900 antialiased selection:bg-brand-red selection:text-white">
+        <HashScroll />
         {children}
       </body>
     </html>

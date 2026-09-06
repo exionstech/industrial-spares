@@ -56,8 +56,19 @@ const config: Config = {
           dark: "hsl(var(--brand-dark))",
           "card-dark": "hsl(var(--brand-card-dark))",
           "bg-light": "hsl(var(--brand-bg-light))",
+          line: "hsl(var(--brand-line))",
+          muted: "hsl(var(--brand-muted))",
+          faint: "hsl(var(--brand-faint))",
+          "on-dark": "hsl(var(--brand-on-dark))",
           orange: "hsl(var(--brand-orange))",
         },
+      },
+      maxWidth: {
+        /* Site-wide cap - the page never renders wider than the design canvas. */
+        page: "1440px",
+        /* Inner content shell: 1200px of content + the 32px gutter each side,
+           so sections sit on the design's 120px margins at full page width. */
+        shell: "1264px",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -76,10 +87,15 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "fade-in": {
+          from: { opacity: "0", transform: "translateY(-4px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-in": "fade-in 0.2s ease-out",
       },
     },
   },

@@ -1,22 +1,27 @@
-import { ArrowUpRight, Mail, MapPin } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import type React from "react";
-import { BRAND_INFO, IMAGES, NAV_LINKS, OTHER_PRODUCTS } from "@/lib/constants";
+import { Button } from "@/components/ui/button";
+import { HashLink } from "@/components/ui/hash-link";
+import {
+  BRAND_INFO,
+  CONTACT_ROUTE,
+  categoryRouteFor,
+  DEVELOPER,
+  FOOTER_COMPANY_LINKS,
+  IMAGES,
+  LEGAL_LINKS,
+} from "@/lib/constants";
+import { FOOTER_PRODUCT_LINKS } from "@/lib/product-catalogue";
 
-interface FooterProps {
-  onOpenQuoteModal: () => void;
-}
-
-export const Footer: React.FC<FooterProps> = ({ onOpenQuoteModal }) => {
+export const Footer: React.FC = () => {
   return (
-    <footer className="bg-brand-dark text-white pt-16 pb-12 border-t border-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 pb-12 border-b border-gray-800">
-          {/* Column 1: Brand Info */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="relative w-24 h-16 flex-shrink-0">
+    <footer className="bg-brand-dark pt-[50px] pb-9 text-white">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-8">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-12 pb-[45px] sm:grid-cols-2 lg:grid-cols-[1.55fr_0.9fr_0.9fr_1fr] lg:gap-x-12 xl:gap-x-16">
+          {/* Brand column */}
+          <div className="lg:max-w-[420px]">
+            <div className="flex items-center gap-2">
+              <div className="relative h-24 w-24 flex-shrink-0">
                 <Image
                   src={IMAGES.logo}
                   alt={BRAND_INFO.fullName}
@@ -26,113 +31,111 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuoteModal }) => {
                 />
               </div>
               <div>
-                <h4 className="text-sm font-bold tracking-wider text-white">{BRAND_INFO.name}</h4>
-                <p className="text-[11px] font-medium text-gray-400 tracking-widest uppercase">
+                <p className="whitespace-nowrap text-sm text-white tracking-[0.16em]">
+                  {BRAND_INFO.name}
+                </p>
+                <p className="whitespace-nowrap text-brand-muted text-sm tracking-[0.16em]">
                   {BRAND_INFO.tagline}
                 </p>
               </div>
             </div>
-            <p className="text-sm text-gray-400 leading-relaxed pt-2">
+            <p className="mt-2 max-w-[300px] text-[#9b9b9b] text-sm leading-[1.65]">
               Manufacturer and exporter of mechanical power transmission products and precision CNC
               machined components from India.
             </p>
-            <div className="flex items-center gap-2 text-xs font-semibold text-gray-300 pt-1">
-              <span className="w-2 h-2 rounded-full bg-brand-red"></span>
-              <span>{BRAND_INFO.est}</span>
+            <div className="mt-6 flex items-center gap-2">
+              <span className="h-2 w-2 flex-shrink-0 bg-brand-red" />
+              <span className="text-[#9b9b9b] text-sm tracking-[0.08em]">{BRAND_INFO.est}</span>
             </div>
           </div>
 
-          {/* Column 2: Quick Links */}
-          <div className="space-y-4">
-            <h4 className="text-base font-bold text-white tracking-wider uppercase border-b border-gray-800 pb-2">
-              Company
-            </h4>
-            <ul className="space-y-2.5 text-sm text-gray-400">
-              {NAV_LINKS.map((link) => (
+          {/* Company links */}
+          <div>
+            <h4 className="text-brand-muted text-sm uppercase tracking-[0.18em]">Company</h4>
+            <ul className="mt-4 space-y-2">
+              {FOOTER_COMPANY_LINKS.map((link) => (
                 <li key={link.name}>
-                  <a
+                  <HashLink
+                    className="text-[#d0d0d0] text-sm transition-colors hover:text-white"
                     href={link.href}
-                    className="hover:text-white transition-colors duration-150 flex items-center gap-1 group"
                   >
-                    <span>{link.name}</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-brand-red" />
-                  </a>
+                    {link.name}
+                  </HashLink>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 3: Products Directory */}
-          <div className="space-y-4">
-            <h4 className="text-base font-bold text-white tracking-wider uppercase border-b border-gray-800 pb-2">
-              Products
-            </h4>
-            <ul className="space-y-2.5 text-sm text-gray-400">
-              <li>
-                <a href="#products" className="hover:text-white transition-colors">
-                  Shaft Collars
-                </a>
-              </li>
-              <li>
-                <a href="#products" className="hover:text-white transition-colors">
-                  Couplings
-                </a>
-              </li>
-              {OTHER_PRODUCTS.map((prod) => (
-                <li key={prod.id}>
-                  <a href="#products" className="hover:text-white transition-colors">
-                    {prod.title}
-                  </a>
+          {/* Product links */}
+          <div>
+            <h4 className="text-brand-muted text-sm uppercase tracking-[0.18em]">Products</h4>
+            <ul className="mt-4 space-y-2">
+              {FOOTER_PRODUCT_LINKS.map((product) => (
+                <li key={product}>
+                  <HashLink
+                    className="text-[#d0d0d0] text-sm transition-colors hover:text-white"
+                    href={categoryRouteFor(product)}
+                  >
+                    {product}
+                  </HashLink>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 4: Contact Info & Action */}
-          <div className="space-y-4">
-            <h4 className="text-base font-bold text-white tracking-wider uppercase border-b border-gray-800 pb-2">
-              Contact
-            </h4>
-            <div className="space-y-3 text-sm text-gray-400">
-              <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-brand-red flex-shrink-0 mt-0.5" />
-                <span>{BRAND_INFO.location}</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-brand-red flex-shrink-0" />
-                <a
-                  href={`mailto:${BRAND_INFO.email}`}
-                  className="hover:text-white transition-colors"
-                >
-                  {BRAND_INFO.email}
-                </a>
-              </div>
-            </div>
-            <div className="pt-2">
-              <button
-                type="button"
-                onClick={onOpenQuoteModal}
-                className="w-full bg-brand-red text-white py-3 px-4 text-xs font-bold uppercase tracking-wider hover:bg-red-700 transition-colors text-center block"
-              >
-                REQUEST A QUOTE
-              </button>
-            </div>
+          {/* Contact column - Address and Email head their own blocks */}
+          <div className="lg:justify-self-end">
+            <h4 className="text-brand-muted text-sm uppercase tracking-[0.18em]">Address</h4>
+            <address className="mt-4 text-[#d0d0d0] text-base not-italic leading-[1.55]">
+              {BRAND_INFO.location}
+            </address>
+
+            <h4 className="mt-7 text-brand-muted text-sm uppercase tracking-[0.18em]">Email</h4>
+            <a
+              className="mt-4 block break-all text-[#d0d0d0] text-base transition-colors hover:text-white"
+              href={`mailto:${BRAND_INFO.email}`}
+            >
+              {BRAND_INFO.email}
+            </a>
+
+            <Button
+              className="mt-7 h-11 w-full tracking-[0.14em]"
+              href={CONTACT_ROUTE}
+              showArrow={false}
+              size="compact"
+              variant="primary"
+            >
+              Request A Quote
+            </Button>
           </div>
         </div>
 
-        {/* Bottom copyright bar */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-          <p>
-            © {new Date().getFullYear()} {BRAND_INFO.fullName}. ALL RIGHTS RESERVED.
+        {/* Bottom bar */}
+        <div className="grid grid-cols-1 gap-4 border-[#2a2a2a] border-t pt-7 text-center sm:grid-cols-3 sm:items-center sm:text-left">
+          <p className="text-brand-muted text-sm">© {new Date().getFullYear()}</p>
+
+          <p className="text-brand-muted text-sm sm:text-center">
+            Developed &amp; Maintained by{" "}
+            <a
+              className="text-brand-red underline-offset-4 transition-colors hover:underline"
+              href={DEVELOPER.url}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {DEVELOPER.name}
+            </a>
           </p>
-          <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-gray-400 transition-colors">
-              Privacy Policy
-            </a>
-            <span>•</span>
-            <a href="#" className="hover:text-gray-400 transition-colors">
-              Terms &amp; Conditions
-            </a>
+
+          <div className="flex items-center justify-center gap-6 sm:justify-end">
+            {LEGAL_LINKS.map((link) => (
+              <a
+                className="text-brand-muted text-sm transition-colors hover:text-white"
+                href={link.href}
+                key={link.name}
+              >
+                {link.name}
+              </a>
+            ))}
           </div>
         </div>
       </div>

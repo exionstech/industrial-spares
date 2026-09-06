@@ -29,6 +29,18 @@
     /* Brand Light Background: #F5F5F5 -> HSL 0 0% 96% */
     --brand-bg-light: 0 0% 96%;
 
+    /* Brand Hairline Border: #E2E2E2 -> HSL 0 0% 89% */
+    --brand-line: 0 0% 89%;
+
+    /* Brand Muted Copy: #6B6B6B -> HSL 0 0% 42% */
+    --brand-muted: 0 0% 42%;
+
+    /* Brand Faint Copy (light-on-light lead): #B7B4B1 -> HSL 27 4% 71% */
+    --brand-faint: 27 4% 71%;
+
+    /* Brand Copy on Dark Cards: #B8B5B0 -> HSL 38 5% 71% */
+    --brand-on-dark: 38 5% 71%;
+
     /* Brand Orange Accent: #FF6613 -> HSL 20 100% 54% */
     --brand-orange: 20 100% 54%;
 
@@ -48,7 +60,8 @@
     --input: 0 0% 89.8%;
     --ring: 352 85% 43%;
 
-    --radius: 0.5rem;
+    /* Square corners throughout - no image or box carries a radius. */
+    --radius: 0rem;
   }
 
   .dark {
@@ -86,8 +99,19 @@
   * {
     @apply border-border;
   }
+
   body {
-    @apply bg-background text-foreground font-sans antialiased overflow-x-hidden;
+    @apply bg-background text-foreground antialiased overflow-x-hidden;
+    font-family: var(--font-manrope), sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-manrope), sans-serif;
   }
 }
 
@@ -95,7 +119,67 @@ html {
   scroll-behavior: smooth;
 }
 
+/*
+ * Distance from the viewport edge to the shared 1200px content column. Lets a
+ * full-bleed panel align its copy with the rest of the page's left margin.
+ */
+:root {
+  --shell-gutter: max(1rem, calc((100vw - 1200px) / 2));
+}
+
+@media (min-width: 640px) {
+  :root {
+    --shell-gutter: max(2rem, calc((100vw - 1200px) / 2));
+  }
+}
+
 ::selection {
   background-color: hsl(var(--primary));
   color: #ffffff;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.mobile-marquee {
+  animation: marquee 18s linear infinite;
+}
+
+::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+}
+
+select:invalid {
+  color: #9ca3af;
+}
+
+/* Snap carousels hide their scrollbar; the dot pager is the affordance. */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Chrome adds its own clear control to type="search"; the field keeps just
+   the magnifier, as drawn. */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
 }

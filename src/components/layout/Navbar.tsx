@@ -3,118 +3,210 @@
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type React from "react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { BRAND_INFO, IMAGES, NAV_LINKS } from "@/lib/constants";
+import { BRAND_INFO, CONTACT_ROUTE, IMAGES, NAV_LINKS } from "@/lib/constants";
 
-interface NavbarProps {
-  onOpenQuoteModal: () => void;
-}
+/*
+ * The nav points at real routes, so the selected item comes from the current
+ * path. "About us" and "Quality" share /about, separated by the hash.
+ */
+const resolveActive = (pathname: string, hash: string): string | null => {
+  if (pathname === "/") {
+    return "Home";
+  }
+  if (pathname === "/about") {
+    return hash === "#quality" ? "Quality" : "About us";
+  }
+  if (pathname === "/products" || pathname.startsWith("/products/")) {
+    return "Products";
+  }
+  return null;
+};
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
+export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [hash, setHash] = useState("");
+  const pathname = usePathname();
 
+  /*
+   * The path is known during render, so the selected item is right on the
+   * server too; only the hash has to wait for the client.
+   */
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
+    const sync = () => setHash(window.location.hash);
+
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, [pathname]);
+
+  const activeName = resolveActive(pathname, hash);
+
+  /* Hold the page still behind the drawer, and let Escape close it. */
+  useEffect(() => {
+    if (!mobileMenuOpen) {
+      return;
+    }
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileMenuOpen(false);
       }
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [mobileMenuOpen]);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-md py-3"
-          : "bg-white border-b border-gray-100 py-4"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14">
-          {/* Logo */}
-          <Link href="#home" className="flex items-center gap-3 group">
-            <div className="relative w-24 sm:w-28 h-14 sm:h-16 flex-shrink-0">
-              <Image
-                src={IMAGES.logo}
-                alt={BRAND_INFO.fullName}
-                fill
-                className="object-contain"
-                priority
-                unoptimized
-              />
-            </div>
-          </Link>
+    <header className="fixed top-0 z-50 w-full border-brand-line border-b bg-white">
+      <div className="relative mx-auto flex h-[68px] w-full max-w-page items-center justify-between px-4 sm:px-5 lg:h-[96px]">
+        <Link className="flex-shrink-0" href="/#home">
+          <div className="relative h-[50px] w-[68px] lg:h-[80px] lg:w-[108px]">
+            <Image
+              alt={BRAND_INFO.fullName}
+              className="object-contain"
+              fill
+              priority
+              src={IMAGES.logo}
+              unoptimized
+            />
+          </div>
+        </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-sm font-semibold text-gray-800 hover:text-brand-red transition-colors duration-150 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-red hover:after:w-full after:transition-all after:duration-200"
-              >
-                {link.name}
-              </a>
-            ))}
+        <div className="hidden items-center lg:flex">
+          <nav className="flex items-center gap-10">
+            {NAV_LINKS.map((link) => {
+              const isActive = activeName === link.name;
+
+              return (
+                <Link
+                  className={`relative pb-1 font-bold text-[15px] transition-colors duration-150 ${
+                    isActive ? "text-brand-red" : "text-brand-dark hover:text-brand-red"
+                  }`}
+                  href={link.href}
+                  key={link.name}
+                >
+                  {link.name}
+                  {isActive && (
+                    <span className="absolute right-0 left-0 -bottom-1 h-[2px] rounded-full bg-brand-red" />
+                  )}
+                </Link>
+              );
+            })}
           </nav>
 
-          {/* Action Button */}
-          <div className="hidden md:block">
-            <Button onClick={onOpenQuoteModal} variant="primary">
-              Request A Quote
-            </Button>
-          </div>
-
-          {/* Mobile Hamburger Toggle */}
-          <div className="flex md:hidden">
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-gray-700 hover:text-brand-red hover:bg-gray-100 rounded-md focus:outline-none"
-              aria-label="Toggle Navigation Menu"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+          <Button
+            className="ml-12 h-[52px] w-[205px] justify-between rounded-none font-medium text-base"
+            href={CONTACT_ROUTE}
+            size="nav"
+            variant="primary"
+          >
+            Request A Quote
+          </Button>
         </div>
+
+        <button
+          aria-controls="mobile-menu"
+          aria-expanded={mobileMenuOpen}
+          aria-label="Open navigation menu"
+          className="p-2 text-brand-dark hover:text-brand-red lg:hidden"
+          onClick={() => setMobileMenuOpen(true)}
+          type="button"
+        >
+          <Menu className="h-6 w-6" />
+        </button>
       </div>
 
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-b border-gray-200 px-4 pt-2 pb-6 space-y-3 animate-fade-in shadow-xl">
-          <div className="flex flex-col space-y-3 pt-2">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50 hover:text-brand-red"
-              >
-                {link.name}
-              </a>
-            ))}
-            <div className="pt-3">
-              <Button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenQuoteModal();
-                }}
-                variant="primary"
-                className="w-full justify-center"
-              >
-                Request A Quote
-              </Button>
-            </div>
+      {/* Mobile drawer - slides in over the page from the left */}
+      <div
+        aria-hidden={!mobileMenuOpen}
+        className={`fixed inset-0 z-50 lg:hidden ${mobileMenuOpen ? "" : "pointer-events-none"}`}
+      >
+        <button
+          aria-label="Close navigation menu"
+          className={`absolute inset-0 h-full w-full bg-brand-dark/50 transition-opacity duration-300 ${
+            mobileMenuOpen ? "opacity-100" : "opacity-0"
+          }`}
+          onClick={() => setMobileMenuOpen(false)}
+          tabIndex={mobileMenuOpen ? 0 : -1}
+          type="button"
+        />
+
+        <div
+          className={`absolute inset-y-0 left-0 flex w-[82%] max-w-[360px] flex-col bg-white transition-transform duration-300 ease-out ${
+            mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+          id="mobile-menu"
+        >
+          <div className="flex items-start justify-between px-6 pt-5">
+            <Link
+              className="relative block h-[68px] w-[68px] flex-shrink-0"
+              href="/#home"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <Image
+                alt={BRAND_INFO.fullName}
+                className="object-contain"
+                fill
+                src={IMAGES.logo}
+                unoptimized
+              />
+            </Link>
+
+            <button
+              aria-label="Close navigation menu"
+              className="mt-2 flex h-9 w-9 items-center justify-center border border-brand-line text-brand-dark transition-colors hover:border-brand-red hover:text-brand-red"
+              onClick={() => setMobileMenuOpen(false)}
+              tabIndex={mobileMenuOpen ? 0 : -1}
+              type="button"
+            >
+              <X className="h-5 w-5" />
+            </button>
           </div>
+
+          <nav className="flex flex-col px-6 pt-8">
+            {NAV_LINKS.map((link) => {
+              const isActive = activeName === link.name;
+
+              return (
+                <Link
+                  className={`py-3.5 font-bold text-sm transition-colors ${
+                    isActive
+                      ? "text-brand-red underline decoration-brand-red underline-offset-[6px]"
+                      : "text-brand-dark hover:text-brand-red"
+                  }`}
+                  href={link.href}
+                  key={link.name}
+                  onClick={() => setMobileMenuOpen(false)}
+                  tabIndex={mobileMenuOpen ? 0 : -1}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+
+            <Button
+              className="mt-8 w-full justify-center rounded-none"
+              href={CONTACT_ROUTE}
+              onClick={() => setMobileMenuOpen(false)}
+              showArrow={false}
+              size="nav"
+              variant="primary"
+            >
+              Request A Quote
+            </Button>
+          </nav>
         </div>
-      )}
+      </div>
     </header>
   );
 };

@@ -1,64 +1,103 @@
+"use client";
+
 import Image from "next/image";
 import type React from "react";
-import { Button } from "@/components/ui/button";
-import { IMAGES } from "@/lib/constants";
+import { useCallback, useEffect, useState } from "react";
+import { HERO_SLIDES } from "@/lib/constants";
 
-interface HeroSectionProps {
-  onOpenQuoteModal: () => void;
-}
+const SLIDE_INTERVAL_MS = 6000;
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenQuoteModal }) => {
+/* Navbar (92) + section padding (30 + 20) + pager block (44). */
+const HERO_CHROME_PX = 186;
+
+/*
+ * The outgoing slide stays fully opaque one layer down while the incoming one
+ * fades in over it - cross-fading both at once would dip through the dark
+ * backing colour halfway through.
+ */
+export const HeroSection: React.FC = () => {
+  const [slides, setSlides] = useState({ active: 0, previous: 0 });
+
+  const goToSlide = useCallback((index: number) => {
+    setSlides((current) =>
+      current.active === index ? current : { active: index, previous: current.active },
+    );
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSlides((current) => ({
+        active: (current.active + 1) % HERO_SLIDES.length,
+        previous: current.active,
+      }));
+    }, SLIDE_INTERVAL_MS);
+    return () => clearInterval(timer);
+  }, []);
+
+  const layerClass = (index: number) => {
+    if (index === slides.active) {
+      return "z-20 opacity-100 transition-opacity duration-700";
+    }
+    if (index === slides.previous) {
+      return "z-10 opacity-100";
+    }
+    return "z-0 opacity-0";
+  };
+
   return (
     <section
       id="home"
-      className="relative w-full min-h-[750px] lg:min-h-[820px] flex items-center pt-24 pb-16 bg-gray-900 overflow-hidden"
+      className="scroll-mt-[68px] lg:scroll-mt-[92px] bg-white pt-0 pb-5 sm:pt-[110px]"
     >
-      {/* Background Image Container with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src={IMAGES.heroBg}
-          alt="Industrial Spares Manufacturing Facility"
-          fill
-          className="object-cover object-center opacity-60"
-          priority
-          unoptimized
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-transparent" />
+      {/*
+       * Photo band keeps its ~2.19:1 ratio until that would push the first
+       * screen past the viewport; HERO_CHROME_PX is the navbar plus this
+       * section's own padding and pager, so navbar + hero never exceed 100vh.
+       */}
+      {/* Hero runs wider than the rest of the page - viewport minus a small gutter,
+          not the 1440 shell. */}
+      <div className="w-full px-0 sm:px-8">
+        <div
+          className="relative h-[70vh] max-h-none min-h-0 w-full overflow-hidden bg-brand-dark sm:aspect-[2.19/1] sm:h-auto sm:max-h-[calc(100svh-var(--hero-chrome))] sm:min-h-[220px]"
+          style={{ "--hero-chrome": `${HERO_CHROME_PX}px` } as React.CSSProperties}
+        >
+          {HERO_SLIDES.map((slide, index) => (
+            <Image
+              key={slide.id}
+              src={slide.image}
+              alt={slide.alt}
+              fill
+              sizes="100vw"
+              priority={index === 0}
+              /* Off-screen slides still decode up front so a rotation never flashes empty. */
+              loading={index === 0 ? undefined : "eager"}
+              className={`object-cover object-center ${layerClass(index)}`}
+              unoptimized
+            />
+          ))}
+        </div>
       </div>
 
-      {/* Content Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="max-w-2xl text-white space-y-6 animate-fade-in">
-          {/* Subtitle / Kicker */}
-          <div className="inline-flex items-center gap-2">
-            <span className="h-0.5 w-6 bg-brand-orange"></span>
-            <span className="text-xs sm:text-sm font-bold tracking-widest uppercase text-gray-200">
-              FROM KOLKATA TO THE WORLD
-            </span>
-          </div>
-
-          {/* Main Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-            Wherever you are, <br />
-            <span className="text-brand-red">we deliver.</span>
-          </h1>
-
-          {/* Body Paragraph */}
-          <p className="text-base sm:text-lg text-gray-300 font-normal leading-relaxed max-w-xl">
-            30+ years of export experience and regular supply relationships with customers across
-            international markets.
-          </p>
-
-          {/* Dual Action CTAs */}
-          <div className="flex flex-wrap items-center gap-4 pt-4">
-            <a href="#products">
-              <Button variant="secondary">EXPLORE PRODUCTS</Button>
-            </a>
-            <Button onClick={onOpenQuoteModal} variant="primary">
-              REQUEST A QUOTE
-            </Button>
-          </div>
-        </div>
+      {/* Slide pager */}
+      <div className="relative z-30 -mt-10 flex items-center justify-center gap-0.5 sm:mt-5 sm:gap-1">
+        {HERO_SLIDES.map((slide, index) => (
+          <button
+            key={slide.id}
+            type="button"
+            onClick={() => goToSlide(index)}
+            aria-label={`Show slide ${index + 1}`}
+            aria-current={index === slides.active}
+            className="flex h-5 w-5 items-center justify-center sm:h-6 sm:w-6"
+          >
+            <span
+              className={`rounded-full transition-all duration-200 ${
+                index === slides.active
+                  ? "h-2 w-2 bg-[#636363] sm:h-3 sm:w-3"
+                  : "h-1.5 w-1.5 bg-[#d9d9d9] sm:h-2.5 sm:w-2.5"
+              }`}
+            />
+          </button>
+        ))}
       </div>
     </section>
   );
