@@ -20,7 +20,7 @@ export const ProductsHero: React.FC = () => {
         </Reveal>
 
         {/* Photo bleeds to the right edge of the page shell */}
-        <div className="relative order-2 aspect-[630/420] w-full overflow-hidden bg-brand-bg-light lg:col-start-2 lg:row-span-3 lg:row-start-1">
+        <div className="relative order-2 aspect-[630/420] w-full overflow-hidden bg-brand-bg-light lg:col-start-2 lg:row-span-3 lg:row-start-1 lg:translate-y-8">
           <Image
             alt="Shaft collars and couplings laid out on an engineering drawing"
             className="object-cover object-center"

@@ -7,7 +7,7 @@ const infoSections = [
     content: [
       "We may collect information that you voluntarily provide to us when you interact with our Website, including:",
       "Contact Information: We may collect details such as your name, email address, phone number, company information, and other contact details that you provide when submitting an enquiry or contacting us.",
-      "Enquiry and Requirement Information: We may collect information relating to your product requirements, specifications, applications, quotation requests, and other details you provide when enquiring about shaft collars, couplings, shafts, sprockets, or customised machined components.",
+      "Enquiry and Requirement Information: We may collect information relating to your product requirements, specifications, applications, quotation requests, and other details you provide when enquiring about shaft collars, couplings, shafts, or customised machined components.",
       "Communication Information: We may retain information contained in communications you send to us, including enquiries, requests for quotations, and other business-related correspondence.",
     ],
   },

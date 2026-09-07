@@ -113,9 +113,8 @@ export const VALUE_PROPOSITIONS = [
 /* ---------------------------------------------------------------- Contact */
 
 export const CONTACT_BENEFITS = [
-  "ISO 9001:2015 Certified Manufacturing",
-  "Custom Machining as per Technical Drawings",
-  "Fast Turnaround on Global B2B Inquiries",
+  "ISO 9001 Quality Management System",
+  "Customised machined components manufactured to customer-specific requirements.",
 ];
 
 export const CONTACT_CHANNELS = [
@@ -215,33 +214,23 @@ export const FACILITY_MEDIA = [
 export const CAPABILITIES = [
   {
     icon: "settings",
-    title: "CNC Turning Machines",
-    description: "High-speed turning and threaded machining with strict tolerances.",
+    title: "CNC-Controlled Turning Machines",
+    description: "Our manufacturing facility is equipped with CNC-controlled turning machines.",
   },
   {
     icon: "sliders",
     title: "Vertical Machining Centres (VMCs)",
-    description: "Multi-axis precise milling on customized structural blocks.",
+    description: "Our manufacturing facility is equipped with Vertical Machining Centres (VMCs).",
   },
   {
     icon: "toolbox",
-    title: "Conventional Machining",
-    description: "Heavy-duty manual shaping and finishing for bespoke industrial spares.",
+    title: "Conventional Machining Equipment",
+    description: "Our manufacturing facility is equipped with conventional machining equipment.",
   },
   {
     icon: "activity",
     title: "Precision Measuring Instruments",
-    description: "Calibration down to sub-microns with verified equipment.",
-  },
-  {
-    icon: "shield",
-    title: "Manufacturing & Inspection",
-    description: "End-to-end processing followed by comprehensive QA checklist logs.",
-  },
-  {
-    icon: "database",
-    title: "Customer-specific Machining",
-    description: "Custom metallurgy and tooling precisely tailored to bespoke drawings.",
+    description: "Our manufacturing facility is equipped with precision measuring instruments.",
   },
 ] as const;
 
@@ -334,22 +323,24 @@ export const APPROACH_PILLARS = [
   {
     number: "01",
     title: "Customised Components",
-    description: "Tooling and setup tailored completely to your bespoke technical blueprint.",
+    description:
+      "From customised components and small-batch requirements to repeat production orders.",
   },
   {
     number: "02",
-    title: "Small-Batch Specialists",
-    description: "No prohibitive minimum order volumes. We accommodate short trial runs.",
+    title: "Small-Batch Requirements",
+    description: "We focus on understanding the application and meeting specifications accurately.",
   },
   {
     number: "03",
     title: "Repeat Production Orders",
-    description: "Standardized batch schedules to maintain stock consistency month-to-month.",
+    description: "Our objective is simple: to deliver products that meet expectations.",
   },
   {
     number: "04",
-    title: "Material Traceability",
-    description: "Verified raw alloy supply with mill test certificate logs preserved for audits.",
+    title: "Dependable Service",
+    description:
+      "Providing dependable service throughout the process and building relationships that last.",
   },
 ];
 
@@ -357,19 +348,22 @@ export const VISION_PILLARS = [
   {
     title: "Kolkata → Global",
     description:
-      "Proudly leveraging local skilled machining craftsmanship for export excellence worldwide.",
+      "Our mission is to keep building meaningful connections with importers and businesses around the world.",
   },
   {
     title: "Direct Relationships",
-    description: "No intermediaries. You speak directly with our core engineering decision makers.",
+    description:
+      "Creating direct relationships that reduce middlemen, improve pricing and deliver genuine value.",
   },
   {
     title: "Personal Service",
-    description: "Founder Janardan Paul remains personally involved in client project milestones.",
+    description:
+      "At the heart of Industrial Spares is a deeply personal approach to business — Janardan Paul remains personally involved with his customers, corresponding with and following up with clients himself, while our growing marketing team continuously develops new international relationships.",
   },
   {
     title: "Competitive Manufacture",
-    description: "High-accuracy production combined with cost-efficient resource allocation.",
+    description:
+      "We believe in making connections that last, combining competitive manufacturing with personal service, and taking Kolkata-made engineering to the world.",
   },
 ];
 

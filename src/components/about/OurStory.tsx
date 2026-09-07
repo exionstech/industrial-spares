@@ -1,7 +1,7 @@
 import type React from "react";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionEyebrow } from "@/components/ui/section-eyebrow";
-import { MILESTONES } from "@/lib/constants";
+// import { MILESTONES } from "@/lib/constants";
 
 export const OurStory: React.FC = () => {
   return (
@@ -26,13 +26,14 @@ export const OurStory: React.FC = () => {
             <p className="text-brand-muted">
               Today, Industrial Spares specialises in the manufacture and export of precision
               mechanical power transmission products and customised machined components. Our product
-              range includes shaft collars, couplings, shafts, sprockets and other engineered
-              components manufactured to customer-specific requirements.
+              range includes shaft collars, couplings, shafts and other engineered components
+              manufactured to customer-specific requirements.
             </p>
           </div>
         </Reveal>
 
-        {/* Milestone timeline */}
+        {/*
+        Milestone timeline
         <div className="mt-16 border border-brand-line px-6 py-8 sm:px-10 sm:py-10">
           <p className="text-brand-muted text-sm uppercase tracking-[0.14em]">
             Our Milestone Journey
@@ -99,6 +100,7 @@ export const OurStory: React.FC = () => {
             ))}
           </ol>
         </div>
+        */}
       </div>
     </section>
   );

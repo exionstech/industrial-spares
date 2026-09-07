@@ -22,8 +22,9 @@ export const VisionMission: React.FC = () => {
               and machine components.
             </p>
             <p className="mt-7 text-base text-brand-muted leading-[1.65]">
-              Today, the company actively serves demanding industrial customers across the USA,
-              Australia, New Zealand and other competitive international markets.
+              What began from nothing has grown into a business serving customers across the USA,
+              Australia, New Zealand and other international markets, while maintaining a strong
+              presence in the local market.
             </p>
           </div>
         </Reveal>
@@ -38,10 +39,8 @@ export const VisionMission: React.FC = () => {
         </div>
 
         <p className="mt-14 max-w-[1200px] text-base text-brand-dark leading-[1.65]">
-          Janardan Paul remains personally involved with his customers, corresponding with and
-          following up with clients himself, while our growing marketing team continuously develops
-          new international relationships. We believe in making connections that last, combining
-          competitive manufacturing with personal service.
+          We believe in making connections that last, combining competitive manufacturing with
+          personal service, and taking Kolkata-made engineering to the world.
         </p>
       </div>
     </section>

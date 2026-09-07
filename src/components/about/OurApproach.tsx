@@ -8,7 +8,7 @@ export const OurApproach: React.FC = () => {
       <div className="mx-auto max-w-shell px-4 sm:px-8">
         <SectionEyebrow>Our Approach</SectionEyebrow>
         <h2 className="mt-3 font-medium text-3xl text-brand-dark tracking-tight">
-          More than supplying a component.
+          Precision manufactured. Reliably delivered.
         </h2>
 
         <div className="mt-14 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
@@ -21,13 +21,13 @@ export const OurApproach: React.FC = () => {
             </p>
 
             <p className="mt-8 max-w-[540px] text-base text-brand-muted leading-[1.65]">
-              Our engineering team collaborates directly with machine builders and industrial parts
-              distributors to ensure every technical requirement is accounted for.
+              From customised components and small-batch requirements to repeat production orders,
+              our objective is simple: to deliver products that meet expectations and build
+              relationships that last.
             </p>
 
             <blockquote className="mt-10 max-w-[560px] font-medium text-2xl text-brand-red leading-[1.35]">
-              &ldquo;Our objective is simple: to deliver products that meet expectations and build
-              relationships that last.&rdquo;
+              Industrial Spares &mdash; Precision manufactured. Reliably delivered.
             </blockquote>
           </div>
 

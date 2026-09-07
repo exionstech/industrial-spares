@@ -4,7 +4,8 @@ export const CATALOGUE_CATEGORIES = [
   "Shaft Collars",
   "Couplings",
   "CNC Components",
-  "Sprockets",
+  "Nozzles",
+  "Pneumatic Actuators",
   "Valves",
 ] as const;
 
@@ -205,12 +206,6 @@ export const OTHER_PRODUCTS = [
     title: "CNC Components",
     image: "/assets/products/cnc-components.jpg",
     description: "High-precision CNC turned and milled components to custom prints.",
-  },
-  {
-    id: "sprockets",
-    title: "Sprockets",
-    image: "/assets/products/sprockets.jpg",
-    description: "Industrial drive sprockets with induction hardened teeth.",
   },
   {
     id: "valves",

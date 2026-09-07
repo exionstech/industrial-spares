@@ -17,7 +17,7 @@ export const Capabilities: React.FC = () => {
   return (
     <section className="bg-white py-20 lg:py-[120px]">
       <div className="mx-auto max-w-shell px-4 sm:px-8">
-        <SectionEyebrow>Manufacturing Capabilities</SectionEyebrow>
+        <SectionEyebrow>Manufacturing &amp; Engineering Capabilities</SectionEyebrow>
         <h2 className="mt-3 font-medium text-3xl text-brand-dark tracking-tight">
           Precision built into every process.
         </h2>
@@ -49,10 +49,17 @@ export const Capabilities: React.FC = () => {
         </div>
 
         <div className="mt-12 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-          <p className="max-w-[790px] text-brand-muted text-base leading-[1.65]">
-            These capabilities enable us to manufacture components with the accuracy, consistency
-            and dimensional control required for demanding industrial applications.
-          </p>
+          <div className="max-w-[790px] text-brand-muted text-base leading-[1.65]">
+            <p>
+              These capabilities enable us to manufacture components with the accuracy, consistency
+              and dimensional control required for demanding industrial applications.
+            </p>
+            <p className="mt-4">
+              We combine modern machining technology with experienced workmanship and a skilled
+              manufacturing and inspection team. Every component is produced with a strong focus on
+              precision, reliability and consistent quality.
+            </p>
+          </div>
           <Button className="self-start" href="/#products" size="cta" variant="primary">
             Download Spec Sheet
           </Button>
