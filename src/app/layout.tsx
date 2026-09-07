@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     "Power Transmission Parts",
   ],
   authors: [{ name: "Industrial Spares Manufacturing Company" }],
+  icons: {
+    icon: "/assets/brand/Favicon.svg",
+  },
 };
 
 export default function RootLayout({
