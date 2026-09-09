@@ -241,3 +241,38 @@ export const OTHER_PRODUCT_FAMILIES = [
     category: "Couplings",
   },
 ] as const;
+
+/*
+ * Homepage product overview. The homepage introduces the three families we
+ * manufacture and stops there - type -> material -> catalogue navigation is the
+ * Products page's job, so nothing below family level belongs in here.
+ */
+export const HOME_PRODUCT_FAMILIES = [
+  {
+    id: "shaft-collars",
+    title: "Shaft Collars",
+    image: "/assets/products/shaft-collars.jpg",
+    imageAlt: "Precision machined shaft collars",
+    description:
+      "Available in solid / set, single split, double split and threaded bore configurations.",
+    configurations: ["Solid / Set", "Single Split", "Double Split", "Threaded Bore"],
+  },
+  {
+    id: "couplings",
+    title: "Couplings",
+    image: "/assets/products/couplings.jpg",
+    imageAlt: "Precision machined couplings",
+    description: "Available in rigid and split coupling configurations.",
+    configurations: ["Rigid Couplings", "Split Couplings"],
+  },
+] as const;
+
+/* Made to order, so this family is introduced on the homepage without a catalogue CTA. */
+export const HOME_OTHER_CNC_PRODUCTS = {
+  id: "other-cnc-products",
+  title: "Other CNC Products",
+  image: "/assets/products/cnc-components.jpg",
+  imageAlt: "CNC machined industrial components",
+  products: ["Pneumatic Actuators", "Leveling Valves", "Nozzles", "Valves"],
+  note: "Manufactured according to customer specifications and technical drawings.",
+} as const;

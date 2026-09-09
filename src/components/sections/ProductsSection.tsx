@@ -1,86 +1,119 @@
 import Image from "next/image";
-import Link from "next/link";
 import type React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/ui/reveal";
 import { SectionEyebrow } from "@/components/ui/section-eyebrow";
-import { catalogueScrollRouteFor } from "@/lib/constants";
-import { CORE_PRODUCTS, MATERIALS, OTHER_PRODUCTS } from "@/lib/product-catalogue";
+import { familyRoute } from "@/lib/catalogue-tree";
+import { HOME_OTHER_CNC_PRODUCTS, HOME_PRODUCT_FAMILIES } from "@/lib/product-catalogue";
 
-type CoreProduct = (typeof CORE_PRODUCTS)[number];
+type ProductFamily = (typeof HOME_PRODUCT_FAMILIES)[number];
 
-interface CoreProductCardProps {
-  product: CoreProduct;
+/* Shared card shell so all three cards keep the same frame, image ratio and footer band. */
+const CardShell: React.FC<{
+  image: string;
   imageAlt: string;
-  /* The second core card mirrors the first: copy left, photo right. */
-  reversed?: boolean;
-}
-
-const CoreProductCard: React.FC<CoreProductCardProps> = ({
-  product,
-  imageAlt,
-  reversed = false,
-}) => (
-  <div className="grid grid-cols-1 border border-brand-line bg-white lg:grid-cols-2">
-    {/* Photo half with floating tag chips */}
-    <div
-      className={`relative min-h-[320px] overflow-hidden bg-brand-dark sm:min-h-[440px] lg:min-h-[440px] ${
-        reversed ? "lg:order-2" : ""
-      }`}
-    >
+  title: string;
+  interactive?: boolean;
+  children: React.ReactNode;
+  footer: React.ReactNode;
+}> = ({ image, imageAlt, title, interactive = false, children, footer }) => (
+  <article
+    className={`group flex h-full flex-col border border-brand-line bg-white transition-colors ${
+      interactive ? "hover:border-brand-red" : ""
+    }`}
+  >
+    <div className="relative aspect-[4/3] overflow-hidden bg-brand-dark">
       <Image
-        src={product.image}
+        src={image}
         alt={imageAlt}
         fill
-        sizes="(max-width: 1024px) 100vw, 50vw"
-        className="object-cover object-center"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]"
         unoptimized
       />
     </div>
 
-    {/* Copy half */}
-    <div className={`flex flex-col p-8 lg:p-10 ${reversed ? "lg:order-1" : ""}`}>
-      <h3 className="font-medium text-3xl text-brand-dark tracking-tight">{product.title}</h3>
-      <p className="mt-4 text-brand-muted text-[15px] leading-[1.65]">{product.description}</p>
-
-      <div className="mt-8">
-        {product.features.map((feat) => (
-          <div
-            key={feat.title}
-            className="flex items-start gap-3 border-brand-bg-light border-b py-3.5"
-          >
-            <span className="mt-[7px] h-1.5 w-1.5 flex-shrink-0 bg-brand-red" />
-            <div>
-              <h4 className="text-brand-dark text-sm">{feat.title}</h4>
-              <p className="mt-0.5 text-brand-muted text-[15px]">{feat.desc}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-8">
-        <Button
-          className="w-fit justify-center px-3 text-xs tracking-[0.06em] sm:px-6 sm:text-sm sm:tracking-[0.08em]"
-          href={catalogueScrollRouteFor(product.title)}
-          variant="primary"
-          size="cta"
-        >
-          {product.ctaText}
-        </Button>
-      </div>
+    <div className="flex flex-1 flex-col p-7 lg:p-8">
+      <h3 className="font-medium text-2xl text-brand-dark tracking-tight">{title}</h3>
+      {children}
+      <div className="mt-auto border-brand-bg-light border-t pt-6">{footer}</div>
     </div>
-  </div>
+  </article>
+);
+
+/* Catalogue-driven family: description, configuration chips, catalogue CTA. */
+const FamilyCard: React.FC<{ family: ProductFamily }> = ({ family }) => (
+  <CardShell
+    image={family.image}
+    imageAlt={family.imageAlt}
+    title={family.title}
+    interactive
+    footer={
+      <Button className="w-full" href={familyRoute(family.id)} variant="primary" size="cta">
+        Explore Catalogue
+      </Button>
+    }
+  >
+    <p className="mt-3 text-brand-muted text-[15px] leading-[1.65]">{family.description}</p>
+
+    <div className="mt-6 mb-8 flex flex-wrap gap-1.5">
+      {family.configurations.map((config) => (
+        <Badge
+          key={config}
+          variant="outline"
+          className="h-7 px-3 text-[11px] text-brand-dark uppercase tracking-[0.1em]"
+        >
+          {config}
+        </Badge>
+      ))}
+    </div>
+  </CardShell>
+);
+
+/* Made-to-order family: a plain list and a capability statement, no catalogue drill-down. */
+const OtherCncCard: React.FC = () => (
+  <CardShell
+    image={HOME_OTHER_CNC_PRODUCTS.image}
+    imageAlt={HOME_OTHER_CNC_PRODUCTS.imageAlt}
+    title={HOME_OTHER_CNC_PRODUCTS.title}
+    footer={
+      <Button
+        className="w-full"
+        href={familyRoute(HOME_OTHER_CNC_PRODUCTS.id)}
+        showArrow={false}
+        size="cta"
+        variant="secondary"
+      >
+        Manufactured To Specifications
+      </Button>
+    }
+  >
+    <ul className="mt-5 mb-5">
+      {HOME_OTHER_CNC_PRODUCTS.products.map((product) => (
+        <li
+          key={product}
+          className="flex items-center gap-3 border-brand-bg-light border-b py-3 last:border-b-0"
+        >
+          <span className="h-1.5 w-1.5 flex-shrink-0 bg-brand-red" />
+          <span className="text-brand-dark text-[15px]">{product}</span>
+        </li>
+      ))}
+    </ul>
+
+    <p className="mb-8 text-brand-muted text-sm leading-[1.55]">{HOME_OTHER_CNC_PRODUCTS.note}</p>
+  </CardShell>
 );
 
 export const ProductsSection: React.FC = () => {
   return (
     <section
       id="products"
-      className="scroll-mt-[68px] lg:scroll-mt-[92px] border-brand-line border-b bg-brand-bg-light pt-10 pb-[96px] lg:pt-[93px]"
+      className="scroll-mt-[68px] lg:scroll-mt-[92px] border-brand-line border-b bg-white pt-10 pb-[96px] lg:pt-[93px]"
     >
       <div className="mx-auto max-w-shell px-4 sm:px-8">
         {/* Section header */}
-        <div className="flex flex-col gap-6 text-center lg:grid lg:grid-cols-[1fr_440px] lg:items-start lg:text-left">
+        <Reveal className="flex flex-col gap-6 text-center lg:grid lg:grid-cols-[1fr_440px] lg:items-start lg:text-left">
           <div>
             <SectionEyebrow className="justify-center lg:justify-start">
               Core Products
@@ -89,68 +122,22 @@ export const ProductsSection: React.FC = () => {
               What we manufacture
             </h2>
           </div>
-          <p className="mx-auto max-w-[320px] text-brand-muted text-[15px] leading-[1.65] lg:mx-0 lg:pt-2">
-            Shaft Collars and Couplings are our primary product families - manufactured to
-            international standards since 1993.
+          <p className="mx-auto max-w-[360px] text-brand-muted text-[15px] leading-[1.65] lg:mx-0 lg:pt-2">
+            Precision-manufactured mechanical power transmission products and custom machined
+            components from Kolkata, India.
           </p>
-        </div>
+        </Reveal>
 
-        {/* Core product cards */}
-        <div className="mt-20 space-y-6">
-          <CoreProductCard product={CORE_PRODUCTS[0]} imageAlt="Precision machined shaft collars" />
-          <CoreProductCard
-            product={CORE_PRODUCTS[1]}
-            imageAlt="Precision machined couplings"
-            reversed
-          />
-        </div>
-
-        {/* Other machine parts */}
-        <div className="mt-[72px]">
-          <SectionEyebrow tone="muted">Other Products</SectionEyebrow>
-          <h3 className="mt-2 font-medium text-brand-dark text-lg">
-            Other machine parts we manufacture
-          </h3>
-
-          <div className="mt-11 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {OTHER_PRODUCTS.map((prod) => (
-              <Link
-                key={prod.id}
-                href={catalogueScrollRouteFor(prod.title)}
-                className="group block border border-brand-line bg-white text-left transition-colors hover:border-brand-red"
-              >
-                <div className="relative h-36 overflow-hidden bg-brand-dark">
-                  <Image
-                    src={prod.image}
-                    alt={prod.title}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    unoptimized
-                  />
-                </div>
-                <div className="px-4 py-3.5">
-                  <h4 className="text-brand-dark text-sm transition-colors group-hover:text-brand-red">
-                    {prod.title}
-                  </h4>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* Materials strip */}
-        <div className="mt-6 border border-brand-line bg-white p-5">
-          <h4 className="text-brand-muted text-sm uppercase tracking-[0.18em]">
-            Materials Available
-          </h4>
-          <div className="mt-3 flex flex-wrap items-center gap-1.5">
-            {MATERIALS.map((mat) => (
-              <Badge key={mat} variant="outline">
-                {mat}
-              </Badge>
-            ))}
-          </div>
+        {/* Three product families */}
+        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:mt-20 lg:grid-cols-3">
+          {HOME_PRODUCT_FAMILIES.map((family, index) => (
+            <Reveal className="h-full" delay={index * 80} key={family.id}>
+              <FamilyCard family={family} />
+            </Reveal>
+          ))}
+          <Reveal className="h-full" delay={160}>
+            <OtherCncCard />
+          </Reveal>
         </div>
       </div>
     </section>

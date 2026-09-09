@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
-import { CatalogueCta } from "@/components/products/CatalogueCta";
-import { ProductCatalogue } from "@/components/products/ProductCatalogue";
-import { ProductsClosingCta } from "@/components/products/ProductsClosingCta";
-import { ProductsHero } from "@/components/products/ProductsHero";
-import { SecondaryCapabilities } from "@/components/products/SecondaryCapabilities";
+import { AllProductsView } from "@/components/products/AllProductsView";
 
 export const metadata: Metadata = {
-  title: "Products | Industrial Spares Manufacturing Company",
+  title: "Product Catalogue | Industrial Spares Manufacturing Company",
   description:
-    "Shaft collars in solid, single split and double split configurations - zinc plated, aluminium, black oxide and stainless steel 304 - plus precision CNC machined components made to drawing.",
+    "Browse the Industrial Spares catalogue by category, configuration and material - shaft collars, couplings and other CNC products manufactured in Kolkata, India.",
 };
 
 export default function ProductsPage() {
@@ -20,13 +15,7 @@ export default function ProductsPage() {
       <Navbar />
 
       <div className="flex-1">
-        <ProductsHero />
-        <Suspense fallback={<div className="min-h-[900px]" />}>
-          <ProductCatalogue />
-        </Suspense>
-        <CatalogueCta />
-        <SecondaryCapabilities />
-        <ProductsClosingCta />
+        <AllProductsView />
       </div>
 
       <Footer />
