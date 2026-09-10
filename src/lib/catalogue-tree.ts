@@ -59,7 +59,11 @@ const SOLID_VARIANTS = [
     image: SOLID_STAINLESS,
   },
   { id: "aluminium", name: "Aluminium", image: photo("Solid Collar Aluminium") },
-  { id: "black-oxide-imperial", name: "Black Oxide Imperial" },
+  {
+    id: "black-oxide-imperial",
+    name: "Black Oxide Imperial",
+    image: photo("Solid Collars_ Black Oxide Imperial"),
+  },
   { id: "black-oxide-metric", name: "Black Oxide Metric", image: SOLID_BLACK_OXIDE },
   { id: "stainless-steel-metric", name: "Stainless Steel Metric", image: SOLID_STAINLESS },
 ] as const;
@@ -116,8 +120,16 @@ const THREADED_BORE_VARIANTS = [
     name: "Stainless Steel 304 Imperial",
     image: photo("Threaded bore shaft collar stainless steel"),
   },
-  { id: "stainless-steel-316-imperial", name: "Stainless Steel 316 Imperial" },
-  { id: "aluminium-imperial", name: "Aluminium Imperial" },
+  {
+    id: "stainless-steel-316-imperial",
+    name: "Stainless Steel 316 Imperial",
+    image: photo("Stainless Steel Imperial Threaded Bore"),
+  },
+  {
+    id: "aluminium-imperial",
+    name: "Aluminium Imperial",
+    image: photo("Threaded Bore_ Aluminium Imperial"),
+  },
 ] as const;
 
 /*
