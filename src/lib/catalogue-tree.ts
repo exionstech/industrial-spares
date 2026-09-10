@@ -121,31 +121,61 @@ const THREADED_BORE_VARIANTS = [
 ] as const;
 
 /*
- * Every coupling type comes in two finishes, each with or without keyways. The
- * supplied coupling photos show plain bores, so they illustrate the keyless variants.
+ * Every coupling type comes in two finishes, each available with or without
+ * keyways - four variants, and the client supplied a photo for each.
  */
-const couplingVariants = (blackOxide: string, stainless: string) =>
+interface CouplingPhotos {
+  blackOxideKeyed: string;
+  blackOxidePlain: string;
+  stainlessKeyed: string;
+  stainlessPlain: string;
+}
+
+const couplingVariants = (photos: CouplingPhotos) =>
   [
-    { id: "black-oxide-with-keyways", name: "Black Oxide With Keyways" },
-    { id: "black-oxide-without-keyways", name: "Black Oxide Without Keyways", image: blackOxide },
-    { id: "stainless-steel-with-keyways", name: "Stainless Steel With Keyways" },
+    {
+      id: "black-oxide-with-keyways",
+      name: "Black Oxide With Keyways",
+      image: photos.blackOxideKeyed,
+    },
+    {
+      id: "black-oxide-without-keyways",
+      name: "Black Oxide Without Keyways",
+      image: photos.blackOxidePlain,
+    },
+    {
+      id: "stainless-steel-with-keyways",
+      name: "Stainless Steel With Keyways",
+      image: photos.stainlessKeyed,
+    },
     {
       id: "stainless-steel-without-keyways",
       name: "Stainless Steel Without Keyways",
-      image: stainless,
+      image: photos.stainlessPlain,
     },
   ] as const;
 
-const RIGID_COUPLING_VARIANTS = couplingVariants(
-  photo("Black oxide rigid coupling"),
-  photo("Rigid coupling stainless"),
-);
+const RIGID_COUPLING_VARIANTS = couplingVariants({
+  blackOxideKeyed: photo("Rigid coupling black oxide with keyway"),
+  blackOxidePlain: photo("Black oxide rigid coupling"),
+  stainlessKeyed: photo("Rigid coupling stainless steel with keyway"),
+  stainlessPlain: photo("Rigid Coupling stainless steel without keyway"),
+});
 
-/* One split coupling photo per finish, so both split types share their finish's photo. */
-const SPLIT_COUPLING_VARIANTS = couplingVariants(
-  photo("Split coupling black oxide"),
-  photo("Split coupling stainless steel"),
-);
+/* Single and double split couplings each have their own four photos. */
+const SINGLE_SPLIT_COUPLING_VARIANTS = couplingVariants({
+  blackOxideKeyed: photo("SINGLE SPLIT COUPLING WITH KEYWAY BLACK OXIDE"),
+  blackOxidePlain: photo("SINGLE SPLIT COUPLING WITHOUT KEYWAY BLACK OXIDE"),
+  stainlessKeyed: photo("SINGLE SPLIT COUPLING WITH KEYWAY STAINLESS STEEL"),
+  stainlessPlain: photo("SINGLE SPLIT COUPLING WITHOUT KEYWAY STAINLESS STEEL"),
+});
+
+const DOUBLE_SPLIT_COUPLING_VARIANTS = couplingVariants({
+  blackOxideKeyed: photo("DOUBLE SPLIT COUPLING WITH KEYWAY BLACK OXIDE"),
+  blackOxidePlain: photo("DOUBLE SPLIT COUPLING WITHOUT KEYWAY BLACK OXIDE (HEAVY)"),
+  stainlessKeyed: photo("DOUBLE SPLIT COUPLING WITH KEYWAY STAINLESS STEEL (HEAVY)"),
+  stainlessPlain: photo("DOUBLE SPLIT COUPLING WITHOUT KEYWAY STAINLESS STEEL (HEAVY)"),
+});
 
 export const CATALOGUE_FAMILIES: readonly CatalogueFamily[] = [
   {
@@ -170,12 +200,12 @@ export const CATALOGUE_FAMILIES: readonly CatalogueFamily[] = [
       {
         id: "single-split-heavy",
         name: "Single Split (Heavy)",
-        variants: SPLIT_COUPLING_VARIANTS,
+        variants: SINGLE_SPLIT_COUPLING_VARIANTS,
       },
       {
         id: "double-split-heavy",
         name: "Double Split (Heavy)",
-        variants: SPLIT_COUPLING_VARIANTS,
+        variants: DOUBLE_SPLIT_COUPLING_VARIANTS,
       },
     ],
   },
