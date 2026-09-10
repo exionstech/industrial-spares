@@ -39,115 +39,125 @@ const PHOTO_DIR = "/assets/products/Product Images";
 const photo = (file: string) => `${PHOTO_DIR}/${file}.png`;
 
 /*
- * Ten photos cover three finishes per configuration. Grade (304 / 316) and
- * metric sizing do not change what a collar looks like, so a finish's photo
- * represents every variant sharing that finish and configuration.
+ * Grade (304 / 316) and metric sizing do not change what a collar looks like, so
+ * a finish's photo represents every variant sharing that finish and configuration.
+ * Variants without an image are awaiting client photography.
  */
+const SOLID_BLACK_OXIDE = photo("Solid Collar Black Oxide");
+const SOLID_STAINLESS = photo("Solid Collar Stainless Steel (304)");
+
 const SOLID_VARIANTS = [
-  { id: "zinc-plated", name: "Zinc Plated", image: photo("Zinc Plated Solid Collar") },
+  { id: "zinc-imperial", name: "Zinc Imperial", image: photo("Zinc Plated Solid Collar") },
+  {
+    id: "stainless-steel-304-imperial",
+    name: "Stainless Steel 304 Imperial",
+    image: SOLID_STAINLESS,
+  },
+  {
+    id: "stainless-steel-316-imperial",
+    name: "Stainless Steel 316 Imperial",
+    image: SOLID_STAINLESS,
+  },
   { id: "aluminium", name: "Aluminium", image: photo("Solid Collar Aluminium") },
-  {
-    id: "stainless-steel-304",
-    name: "Stainless Steel (304)",
-    image: photo("Solid Collar Stainless Steel (304)"),
-  },
-  {
-    id: "stainless-steel-316",
-    name: "Stainless Steel (316)",
-    image: photo("Solid Collar Stainless Steel (304)"),
-  },
-  {
-    id: "black-oxide-metric",
-    name: "Black Oxide Metric",
-    image: photo("Solid Collar Black Oxide"),
-  },
-  {
-    id: "stainless-steel-metric",
-    name: "Stainless Steel Metric",
-    image: photo("Solid Collar Stainless Steel (304)"),
-  },
+  { id: "black-oxide-imperial", name: "Black Oxide Imperial" },
+  { id: "black-oxide-metric", name: "Black Oxide Metric", image: SOLID_BLACK_OXIDE },
+  { id: "stainless-steel-metric", name: "Stainless Steel Metric", image: SOLID_STAINLESS },
 ] as const;
 
-const splitCollarVariants = (blackOxide: string, aluminium: string, stainless: string) =>
-  [
-    { id: "black-oxide", name: "Black Oxide", image: blackOxide },
-    { id: "aluminium", name: "Aluminium", image: aluminium },
-    { id: "stainless-steel-304", name: "Stainless Steel (304)", image: stainless },
-    { id: "stainless-steel-316", name: "Stainless Steel (316)", image: stainless },
-    { id: "black-oxide-metric", name: "Black Oxide Metric", image: blackOxide },
-    { id: "stainless-steel-metric", name: "Stainless Steel Metric", image: stainless },
-  ] as const;
+const SINGLE_SPLIT_BLACK_OXIDE = photo("Single Split Shaft Collar Black Oxide");
+/* Delivered as "Shaf" - referenced as supplied so the file resolves. */
+const SINGLE_SPLIT_STAINLESS = photo("Single Split Shaf Collar Stainless Steel");
 
-const SINGLE_SPLIT_VARIANTS = splitCollarVariants(
-  photo("Single Split Shaft Collar Black Oxide"),
-  photo("Single Split Shaft Collar Aluminium"),
-  /* Delivered as "Shaf" - referenced as supplied so the file resolves. */
-  photo("Single Split Shaf Collar Stainless Steel"),
-);
+/* Not offered in zinc. */
+const SINGLE_SPLIT_VARIANTS = [
+  {
+    id: "stainless-steel-304-imperial",
+    name: "Stainless Steel 304 Imperial",
+    image: SINGLE_SPLIT_STAINLESS,
+  },
+  {
+    id: "stainless-steel-316-imperial",
+    name: "Stainless Steel 316 Imperial",
+    image: SINGLE_SPLIT_STAINLESS,
+  },
+  { id: "black-oxide-metric", name: "Black Oxide Metric", image: SINGLE_SPLIT_BLACK_OXIDE },
+  { id: "stainless-steel-metric", name: "Stainless Steel Metric", image: SINGLE_SPLIT_STAINLESS },
+  { id: "aluminium", name: "Aluminium", image: photo("Single Split Shaft Collar Aluminium") },
+] as const;
 
-const DOUBLE_SPLIT_VARIANTS = splitCollarVariants(
-  photo("Double Split Shaft Collar Black Oxide"),
-  photo("Double Split Shaft Collar Aluminium"),
-  photo("Double Split Shaft Collar Stainless Steel"),
-);
+const DOUBLE_SPLIT_BLACK_OXIDE = photo("Double Split Shaft Collar Black Oxide");
+const DOUBLE_SPLIT_STAINLESS = photo("Double Split Shaft Collar Stainless Steel");
 
-/* Threaded bore collars and rigid couplings share two variants but not their photos. */
+/* Not offered in zinc. */
+const DOUBLE_SPLIT_VARIANTS = [
+  {
+    id: "stainless-steel-304-imperial",
+    name: "Stainless Steel 304 Imperial",
+    image: DOUBLE_SPLIT_STAINLESS,
+  },
+  {
+    id: "stainless-steel-316-imperial",
+    name: "Stainless Steel 316 Imperial",
+    image: DOUBLE_SPLIT_STAINLESS,
+  },
+  { id: "black-oxide-imperial", name: "Black Oxide Imperial", image: DOUBLE_SPLIT_BLACK_OXIDE },
+  { id: "aluminium", name: "Aluminium", image: photo("Double Split Shaft Collar Aluminium") },
+  { id: "black-oxide-metric", name: "Black Oxide Metric", image: DOUBLE_SPLIT_BLACK_OXIDE },
+] as const;
+
 const THREADED_BORE_VARIANTS = [
   {
-    id: "black-oxide",
-    name: "Black Oxide",
+    id: "black-oxide-imperial",
+    name: "Black Oxide Imperial",
     image: photo("Threaded bore shaft collar BLACK OXIDE"),
   },
   {
-    id: "stainless-steel",
-    name: "Stainless Steel",
+    id: "stainless-steel-304-imperial",
+    name: "Stainless Steel 304 Imperial",
     image: photo("Threaded bore shaft collar stainless steel"),
   },
+  { id: "stainless-steel-316-imperial", name: "Stainless Steel 316 Imperial" },
+  { id: "aluminium-imperial", name: "Aluminium Imperial" },
 ] as const;
 
-const RIGID_COUPLING_VARIANTS = [
-  { id: "black-oxide", name: "Black Oxide", image: photo("Black oxide rigid coupling") },
-  { id: "stainless-steel", name: "Stainless Steel", image: photo("Rigid coupling stainless") },
-] as const;
+/*
+ * Every coupling type comes in two finishes, each with or without keyways. The
+ * supplied coupling photos show plain bores, so they illustrate the keyless variants.
+ */
+const couplingVariants = (blackOxide: string, stainless: string) =>
+  [
+    { id: "black-oxide-with-keyways", name: "Black Oxide With Keyways" },
+    { id: "black-oxide-without-keyways", name: "Black Oxide Without Keyways", image: blackOxide },
+    { id: "stainless-steel-with-keyways", name: "Stainless Steel With Keyways" },
+    {
+      id: "stainless-steel-without-keyways",
+      name: "Stainless Steel Without Keyways",
+      image: stainless,
+    },
+  ] as const;
+
+const RIGID_COUPLING_VARIANTS = couplingVariants(
+  photo("Black oxide rigid coupling"),
+  photo("Rigid coupling stainless"),
+);
 
 /* One split coupling photo per finish, so both split types share their finish's photo. */
-const SPLIT_COUPLING_BLACK_OXIDE = photo("Split coupling black oxide");
-const SPLIT_COUPLING_STAINLESS = photo("Split coupling stainless steel");
-
-const SPLIT_COUPLING_VARIANTS = [
-  {
-    id: "black-oxide-single-split",
-    name: "Black Oxide — Single Split",
-    image: SPLIT_COUPLING_BLACK_OXIDE,
-  },
-  {
-    id: "black-oxide-double-split",
-    name: "Black Oxide — Double Split",
-    image: SPLIT_COUPLING_BLACK_OXIDE,
-  },
-  {
-    id: "stainless-steel-single-split",
-    name: "Stainless Steel — Single Split",
-    image: SPLIT_COUPLING_STAINLESS,
-  },
-  {
-    id: "stainless-steel-double-split",
-    name: "Stainless Steel — Double Split",
-    image: SPLIT_COUPLING_STAINLESS,
-  },
-] as const;
+const SPLIT_COUPLING_VARIANTS = couplingVariants(
+  photo("Split coupling black oxide"),
+  photo("Split coupling stainless steel"),
+);
 
 export const CATALOGUE_FAMILIES: readonly CatalogueFamily[] = [
   {
     id: "shaft-collars",
-    name: "Shaft Collars",
+    name: "Shaft Collar",
     image: "/assets/products/shaft-collars.jpg",
     imageAlt: "Precision machined shaft collars",
     types: [
-      { id: "solid-set", name: "Solid / Set Collars", variants: SOLID_VARIANTS },
-      { id: "single-split", name: "Single Split Collars", variants: SINGLE_SPLIT_VARIANTS },
-      { id: "double-split", name: "Double Split Collars", variants: DOUBLE_SPLIT_VARIANTS },
-      { id: "threaded-bore", name: "Threaded Bore Collars", variants: THREADED_BORE_VARIANTS },
+      { id: "solid", name: "Solid Collars", variants: SOLID_VARIANTS },
+      { id: "single-split", name: "Single Split", variants: SINGLE_SPLIT_VARIANTS },
+      { id: "double-split", name: "Double Split", variants: DOUBLE_SPLIT_VARIANTS },
+      { id: "threaded-bore", name: "Threaded Bore", variants: THREADED_BORE_VARIANTS },
     ],
   },
   {
@@ -156,8 +166,17 @@ export const CATALOGUE_FAMILIES: readonly CatalogueFamily[] = [
     image: "/assets/products/couplings.jpg",
     imageAlt: "Precision machined couplings",
     types: [
-      { id: "rigid", name: "Rigid Couplings", variants: RIGID_COUPLING_VARIANTS },
-      { id: "split", name: "Split Couplings", variants: SPLIT_COUPLING_VARIANTS },
+      { id: "rigid", name: "Rigid Coupling", variants: RIGID_COUPLING_VARIANTS },
+      {
+        id: "single-split-heavy",
+        name: "Single Split (Heavy)",
+        variants: SPLIT_COUPLING_VARIANTS,
+      },
+      {
+        id: "double-split-heavy",
+        name: "Double Split (Heavy)",
+        variants: SPLIT_COUPLING_VARIANTS,
+      },
     ],
   },
   {

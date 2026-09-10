@@ -250,20 +250,20 @@ export const OTHER_PRODUCT_FAMILIES = [
 export const HOME_PRODUCT_FAMILIES = [
   {
     id: "shaft-collars",
-    title: "Shaft Collars",
+    title: "Shaft Collar",
     image: "/assets/products/shaft-collars.jpg",
     imageAlt: "Precision machined shaft collars",
-    description:
-      "Available in solid / set, single split, double split and threaded bore configurations.",
-    configurations: ["Solid / Set", "Single Split", "Double Split", "Threaded Bore"],
+    description: "Available in solid, single split, double split and threaded bore configurations.",
+    configurations: ["Solid Collars", "Single Split", "Double Split", "Threaded Bore"],
   },
   {
     id: "couplings",
     title: "Couplings",
     image: "/assets/products/couplings.jpg",
     imageAlt: "Precision machined couplings",
-    description: "Available in rigid and split coupling configurations.",
-    configurations: ["Rigid Couplings", "Split Couplings"],
+    description:
+      "Available in rigid, single split (heavy) and double split (heavy) configurations.",
+    configurations: ["Rigid Coupling", "Single Split (Heavy)", "Double Split (Heavy)"],
   },
 ] as const;
 

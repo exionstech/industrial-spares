@@ -19,9 +19,6 @@ interface TypeViewProps {
 
 /* Level 3: the material / variant selection, the last step before the catalogue. */
 export const TypeView: React.FC<TypeViewProps> = ({ family, type }) => {
-  /* Three across divides six variants evenly; two across avoids an orphan for four. */
-  const columns = type.variants.length % 3 === 0 ? "lg:grid-cols-3" : "lg:grid-cols-2";
-
   return (
     <>
       <CatalogueNav
@@ -40,15 +37,16 @@ export const TypeView: React.FC<TypeViewProps> = ({ family, type }) => {
       />
 
       <div className="mx-auto max-w-shell px-4 pb-20 sm:px-8 lg:pb-[120px]">
-        <div className={`grid grid-cols-1 gap-5 sm:grid-cols-2 ${columns}`}>
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {type.variants.map((variant) => (
             <Link
               className="group flex h-full flex-col border border-brand-line bg-white transition-colors hover:border-brand-red"
               href={variantRoute(family.id, type.id, variant.id)}
               key={variant.id}
             >
-              {variant.image && (
-                <span className="relative block aspect-[4/3] overflow-hidden border-brand-line border-b bg-white">
+              {/* Frame stays when a photo is awaited, so every card keeps the same shape. */}
+              <span className="relative block aspect-[4/3] overflow-hidden border-brand-line border-b bg-white">
+                {variant.image && (
                   <Image
                     alt={`${variant.name} ${type.name.toLowerCase()}`}
                     className="object-contain object-center p-5 transition-transform duration-500 group-hover:scale-[1.04]"
@@ -56,8 +54,8 @@ export const TypeView: React.FC<TypeViewProps> = ({ family, type }) => {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     src={encodeURI(variant.image)}
                   />
-                </span>
-              )}
+                )}
+              </span>
 
               <span className="mt-auto flex items-center justify-between gap-4 px-5 py-4 transition-colors group-hover:bg-brand-bg-light">
                 <span className="whitespace-nowrap text-[13px] text-brand-dark uppercase tracking-[0.1em]">
