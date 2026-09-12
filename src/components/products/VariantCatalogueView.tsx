@@ -24,18 +24,18 @@ interface VariantCatalogueViewProps {
   variant: CatalogueVariant;
 }
 
-const TABLE_FRAME = "mt-6 overflow-auto border border-brand-line bg-white";
+const TABLE_FRAME = "mt-6 overflow-x-auto border border-brand-line bg-white";
 const HEAD_CELL =
   "border-brand-line border-b bg-[#f9fafb] px-6 py-4 text-left font-normal text-brand-dark text-sm";
 
 /*
- * The client's tables run to 63 sizes, so the frame scrolls with the header
- * pinned - the size columns stay labelled however far down the list you are.
+ * Every size is listed in full, however long the table runs - only narrow
+ * screens scroll, and sideways, to reach the right-hand columns.
  */
 const DimensionTable: React.FC<{ table: CatalogueTable }> = ({ table }) => (
-  <div className={`${TABLE_FRAME} max-h-[70vh]`}>
+  <div className={TABLE_FRAME}>
     <table className="w-full min-w-[720px] border-collapse">
-      <thead className="sticky top-0">
+      <thead>
         <tr>
           {table.columns.map((column) => (
             <th className={HEAD_CELL} key={column} scope="col">
