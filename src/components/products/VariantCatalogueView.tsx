@@ -111,6 +111,8 @@ export const VariantCatalogueView: React.FC<VariantCatalogueViewProps> = ({
   variant,
 }) => {
   const table = tableFor(family.id, type.id, variant.id);
+  /* Shown beside the photo, where the column beside a square image is otherwise empty. */
+  const notes = table?.notes ?? [];
 
   const selection = [
     { label: "Family", value: family.name },
@@ -137,18 +139,36 @@ export const VariantCatalogueView: React.FC<VariantCatalogueViewProps> = ({
       <CatalogueLevelHeader eyebrow="Catalogue" title={variant.name} />
 
       <div className="mx-auto max-w-shell px-4 pb-20 sm:px-8 lg:pb-[120px]">
-        {variant.image && (
-          <div className="mb-6 grid grid-cols-1 gap-6 lg:grid-cols-[420px_1fr] lg:items-start">
-            <div className="relative aspect-square w-full border border-brand-line bg-white">
-              <Image
-                alt={`${variant.name} ${type.name.toLowerCase()}`}
-                className="object-contain object-center p-6"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 420px"
-                src={encodeURI(variant.image)}
-              />
-            </div>
+        {(variant.image || notes.length > 0) && (
+          <div
+            className={`mb-6 grid grid-cols-1 gap-6 lg:items-start ${
+              variant.image ? "lg:grid-cols-[420px_1fr]" : ""
+            }`}
+          >
+            {variant.image && (
+              <div className="relative aspect-square w-full border border-brand-line bg-white">
+                <Image
+                  alt={`${variant.name} ${type.name.toLowerCase()}`}
+                  className="object-contain object-center p-6"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 420px"
+                  src={encodeURI(variant.image)}
+                />
+              </div>
+            )}
+
+            {/* Material, finish and packing lines, exactly as the client published them. */}
+            {notes.length > 0 && (
+              <ul className="flex flex-col gap-3 lg:pt-1">
+                {notes.map((note) => (
+                  <li className="flex gap-3 text-brand-muted text-sm leading-[1.6]" key={note}>
+                    <span aria-hidden="true" className="mt-2 h-1 w-1 flex-shrink-0 bg-brand-red" />
+                    {note}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         )}
 
@@ -171,18 +191,6 @@ export const VariantCatalogueView: React.FC<VariantCatalogueViewProps> = ({
           <AwaitingTable
             columns={pendingColumnsFor(family.id, type.id, variant.id) ?? DIMENSION_COLUMNS}
           />
-        )}
-
-        {/* Material, finish and packing lines, exactly as the client published them. */}
-        {table && table.notes.length > 0 && (
-          <ul className="mt-5 flex flex-col gap-2">
-            {table.notes.map((note) => (
-              <li className="flex gap-3 text-brand-muted text-sm leading-[1.6]" key={note}>
-                <span aria-hidden="true" className="mt-2 h-1 w-1 flex-shrink-0 bg-brand-red" />
-                {note}
-              </li>
-            ))}
-          </ul>
         )}
       </div>
     </>
