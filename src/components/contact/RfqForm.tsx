@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import type React from "react";
 import { useId, useRef, useState } from "react";
 import { CategoryMultiSelect } from "@/components/contact/CategoryMultiSelect";
+import { CountrySelect } from "@/components/contact/CountrySelect";
 import { Button } from "@/components/ui/button";
 import { PRODUCT_CATEGORIES } from "@/lib/product-catalogue";
 
@@ -44,9 +45,6 @@ const REQUIRED_FIELDS: { name: FieldName; label: string }[] = [
 
 const fieldClasses =
   "h-11 w-full border border-brand-line bg-white px-4 text-brand-dark text-sm placeholder:text-[#9ca3af] placeholder:opacity-100 placeholder:font-normal focus:border-brand-red focus:outline-none focus:ring-1 focus:ring-brand-red";
-
-const selectChevron =
-  "appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2212%22%20height%3D%228%22%20fill%3D%22none%22%20stroke%3D%22%232d2d2d%22%20stroke-width%3D%221.6%22%3E%3Cpath%20d%3D%22M1%201l5%205%205-5%22/%3E%3C/svg%3E')] bg-[length:12px_8px] bg-[right_1rem_center] bg-no-repeat pr-10";
 
 interface FieldProps {
   id: string;
@@ -251,22 +249,12 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
         </Field>
 
         <Field error={errors.country} id={idFor("country")} label="Country" required>
-          <select
-            autoComplete="country-name"
-            className={`${fieldClasses} ${selectChevron} ${
-              values.country ? "text-brand-dark" : "text-[#9ca3af]"
-            }`}
+          <CountrySelect
             id={idFor("country")}
-            onChange={(e) => setValue("country", e.target.value)}
+            onChange={(country) => setValue("country", country)}
+            options={countries}
             value={values.country}
-          >
-            <option value="">Select country...</option>
-            {countries.map((country) => (
-              <option key={country} value={country}>
-                {country}
-              </option>
-            ))}
-          </select>
+          />
         </Field>
 
         <Field error={errors.product} id={idFor("product")} label="Product / Requirement" required>
