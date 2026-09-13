@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "catalogue:status": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/catalogue-status.mjs",
     "lint": "ultracite check",
     "format": "ultracite fix"
   },

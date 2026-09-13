@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "f=$(jq -r \".tool_input.file_path // .tool_response.filePath // empty\"); case \"$f\" in */src/lib/catalogue-tree.ts|*/src/lib/catalogue-tables.ts|*/src/lib/catalogue-pending.ts) node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON \"${f%/src/lib/*}/scripts/catalogue-status.mjs\" >/dev/null 2>&1 || true;; esac",
+            "timeout": 30,
+            "statusMessage": "Updating catalogue status"
+          }
+        ]
+      }
+    ]
+  }
+}

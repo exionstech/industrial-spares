@@ -13,6 +13,7 @@ This codebase is a pixel-perfect Next.js + Tailwind CSS clone of the company's F
 - `src/lib/constants.ts`: All Framer CDN asset URLs, section content, product details, and badges.
 - `src/components/sections/`: Modular Next.js components for each section of the home page.
 - `src/components/modals/QuoteModal.tsx`: Request For Quote (RFQ) modal component.
+- `docs/CATALOGUE_STATUS.md`: Generated table of every catalogue variant - complete or awaiting data, and its source PDF. Never edit by hand; run `bun run catalogue:status` after changing `src/lib/catalogue-tree.ts`, `catalogue-tables.ts` or `catalogue-pending.ts` (a Claude Code hook in `.claude/settings.json` does this automatically). `bun run catalogue:status --check` fails if it is stale.
 - `src/components/ui/`: Pure lowercased shadcn UI primitive components (`button.tsx`, `badge.tsx`, `dialog.tsx`, `card.tsx`, `input.tsx`, `textarea.tsx`).
 
 ## Commands

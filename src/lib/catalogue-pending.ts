@@ -25,16 +25,6 @@ const COLLAR_METRIC_SOLID = [
   "Set Screw Size",
 ] as const;
 
-/* Metric split collars: cap screws, with a length column. */
-const COLLAR_METRIC_SPLIT = [
-  "ISP Part No",
-  "I.D. (mm)",
-  "O.D. (mm)",
-  "Width (mm)",
-  "Cap Screw Size",
-  "Screw Length",
-] as const;
-
 /* Threaded bores are specified by thread, so no bore diameter column. */
 const COLLAR_THREADED = [
   "ISP Part No",
@@ -47,14 +37,8 @@ const COLLAR_THREADED = [
 ] as const;
 
 const PENDING_COLUMNS: Record<string, readonly string[]> = {
-  "shaft-collars/solid/stainless-steel-316-imperial": COLLAR_IMPERIAL,
   "shaft-collars/solid/black-oxide-imperial": COLLAR_IMPERIAL,
   "shaft-collars/solid/stainless-steel-metric": COLLAR_METRIC_SOLID,
-  "shaft-collars/single-split/stainless-steel-316-imperial": COLLAR_IMPERIAL,
-  "shaft-collars/single-split/black-oxide-metric": COLLAR_METRIC_SPLIT,
-  "shaft-collars/single-split/stainless-steel-metric": COLLAR_METRIC_SPLIT,
-  "shaft-collars/double-split/stainless-steel-316-imperial": COLLAR_IMPERIAL,
-  "shaft-collars/threaded-bore/stainless-steel-304-imperial": COLLAR_THREADED,
   "shaft-collars/threaded-bore/stainless-steel-316-imperial": COLLAR_THREADED,
   "shaft-collars/threaded-bore/aluminium-imperial": COLLAR_THREADED,
 };
