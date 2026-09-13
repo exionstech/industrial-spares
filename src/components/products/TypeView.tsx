@@ -22,7 +22,6 @@ export const TypeView: React.FC<TypeViewProps> = ({ family, type }) => {
   return (
     <>
       <CatalogueNav
-        back={{ name: family.name, href: familyRoute(family.id) }}
         crumbs={[
           { name: "All Products", href: PRODUCTS_ROUTE },
           { name: family.name, href: familyRoute(family.id) },

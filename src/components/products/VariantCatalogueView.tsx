@@ -127,7 +127,6 @@ export const VariantCatalogueView: React.FC<VariantCatalogueViewProps> = ({
   return (
     <>
       <CatalogueNav
-        back={{ name: type.name, href: typeRoute(family.id, type.id) }}
         crumbs={[
           { name: "All Products", href: PRODUCTS_ROUTE },
           { name: family.name, href: familyRoute(family.id) },

@@ -10,7 +10,6 @@ import { PRODUCTS_ROUTE } from "@/lib/constants";
 export const FamilyView: React.FC<{ family: CatalogueFamily }> = ({ family }) => (
   <>
     <CatalogueNav
-      back={{ name: "All Products", href: PRODUCTS_ROUTE }}
       crumbs={[{ name: "All Products", href: PRODUCTS_ROUTE }, { name: family.name }]}
     />
 
