@@ -35,7 +35,6 @@ export const CertificationSection: React.FC = () => {
                   width: badge.width,
                   maxWidth: `${((badge.width / WIDEST_BADGE) * 100).toFixed(1)}%`,
                 }}
-                unoptimized
               />
             </div>
           ))}

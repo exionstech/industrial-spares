@@ -1,5 +1,15 @@
+import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "How Industrial Spares Manufacturing Company collects, uses and protects the information you share with us through enquiries, quotation requests and business communications.",
+  alternates: {
+    canonical: "/privacy-policy",
+  },
+};
 
 const infoSections = [
   {

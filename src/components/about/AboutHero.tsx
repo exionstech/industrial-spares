@@ -14,8 +14,7 @@ export const AboutHero: React.FC = () => {
           fill
           priority
           sizes="100vw"
-          src="/assets/about/mobile-about-hero-bg.png"
-          unoptimized
+          src="/assets/about/mobile-about-hero-bg.webp"
         />
         <Image
           alt="Map of export destinations served from Kolkata"
@@ -23,8 +22,7 @@ export const AboutHero: React.FC = () => {
           fill
           priority
           sizes="100vw"
-          src="/assets/about/about-hero-bg.png"
-          unoptimized
+          src="/assets/about/about-hero-bg.webp"
         />
       </div>
 

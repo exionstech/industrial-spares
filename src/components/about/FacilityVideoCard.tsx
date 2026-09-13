@@ -36,7 +36,6 @@ export const FacilityVideoCard: React.FC<FacilityVideoCardProps> = ({
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               src={image}
-              unoptimized
             />
             <span className="-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 flex h-14 w-14 items-center justify-center rounded-full bg-brand-red shadow-lg transition-transform duration-200 group-hover:scale-110">
               <Play className="h-5 w-5 translate-x-[1px] fill-white text-white" />

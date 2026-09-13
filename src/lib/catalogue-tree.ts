@@ -36,7 +36,7 @@ export interface CatalogueFamily {
  */
 const PHOTO_DIR = "/assets/products/Product Images";
 
-const photo = (file: string) => `${PHOTO_DIR}/${file}.png`;
+const photo = (file: string) => `${PHOTO_DIR}/${file}.webp`;
 
 /*
  * Grade (304 / 316) and metric sizing do not change what a collar looks like, so
@@ -193,7 +193,7 @@ export const CATALOGUE_FAMILIES: readonly CatalogueFamily[] = [
   {
     id: "shaft-collars",
     name: "Shaft Collar",
-    image: "/assets/products/shaft-collars.jpg",
+    image: "/assets/products/shaft-collars.webp",
     imageAlt: "Precision machined shaft collars",
     types: [
       { id: "solid", name: "Solid Collars", variants: SOLID_VARIANTS },
@@ -205,7 +205,7 @@ export const CATALOGUE_FAMILIES: readonly CatalogueFamily[] = [
   {
     id: "couplings",
     name: "Couplings",
-    image: "/assets/products/couplings.jpg",
+    image: "/assets/products/couplings.webp",
     imageAlt: "Precision machined couplings",
     types: [
       { id: "rigid", name: "Rigid Coupling", variants: RIGID_COUPLING_VARIANTS },
@@ -224,7 +224,7 @@ export const CATALOGUE_FAMILIES: readonly CatalogueFamily[] = [
   {
     id: "other-cnc-products",
     name: "Other CNC Products",
-    image: "/assets/products/cnc-components.jpg",
+    image: "/assets/products/cnc-components.webp",
     imageAlt: "CNC machined industrial components",
     types: [],
     products: ["Pneumatic Actuators", "Leveling Valves", "Nozzles", "Valves"],

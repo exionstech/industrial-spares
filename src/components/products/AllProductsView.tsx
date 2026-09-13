@@ -38,7 +38,6 @@ export const AllProductsView: React.FC = () => (
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   src={family.image}
-                  unoptimized
                 />
               </div>
 

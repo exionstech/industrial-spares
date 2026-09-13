@@ -12,10 +12,20 @@ import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { ContactSection } from "@/components/sections/ContactSection";
 
+const description =
+  "Manufacturing precision shaft collars, couplings and machined components in Kolkata since 1993. ISO 9001 certified, exporting to the USA, Australia, New Zealand and beyond.";
+
 export const metadata: Metadata = {
-  title: "About Us | Industrial Spares Manufacturing Company",
-  description:
-    "Manufacturing precision shaft collars, couplings and machined components in Kolkata since 1993. ISO 9001 certified, exporting to the USA, Australia, New Zealand and beyond.",
+  title: "About Us",
+  description,
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: "About Us | Industrial Spares Manufacturing Company",
+    description,
+    url: "/about",
+  },
 };
 
 export default function AboutPage() {

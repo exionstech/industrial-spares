@@ -49,6 +49,12 @@ export const HeroSection: React.FC = () => {
       id="home"
       className="scroll-mt-[68px] lg:scroll-mt-[92px] bg-white pt-0 pb-5 sm:pt-[110px]"
     >
+      {/* Visually hidden - the slides are decorative, so the page's one h1 lives here instead. */}
+      <h1 className="sr-only">
+        Industrial Spares Manufacturing Company - Shaft Collars, Couplings &amp; CNC Components
+        Manufacturer in Kolkata, India
+      </h1>
+
       {/*
        * Photo band keeps its ~2.19:1 ratio until that would push the first
        * screen past the viewport; HERO_CHROME_PX is the navbar plus this
@@ -72,7 +78,6 @@ export const HeroSection: React.FC = () => {
               /* Off-screen slides still decode up front so a rotation never flashes empty. */
               loading={index === 0 ? undefined : "eager"}
               className={`object-cover object-center ${layerClass(index)}`}
-              unoptimized
             />
           ))}
         </div>

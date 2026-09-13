@@ -3,10 +3,20 @@ import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { AllProductsView } from "@/components/products/AllProductsView";
 
+const description =
+  "Browse the Industrial Spares catalogue by category, configuration and material - shaft collars, couplings and other CNC products manufactured in Kolkata, India.";
+
 export const metadata: Metadata = {
-  title: "Product Catalogue | Industrial Spares Manufacturing Company",
-  description:
-    "Browse the Industrial Spares catalogue by category, configuration and material - shaft collars, couplings and other CNC products manufactured in Kolkata, India.",
+  title: "Product Catalogue",
+  description,
+  alternates: {
+    canonical: "/products",
+  },
+  openGraph: {
+    title: "Product Catalogue | Industrial Spares Manufacturing Company",
+    description,
+    url: "/products",
+  },
 };
 
 export default function ProductsPage() {

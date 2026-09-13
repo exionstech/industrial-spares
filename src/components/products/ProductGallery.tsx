@@ -40,14 +40,7 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({ media, productNa
                 type="button"
               >
                 {thumbSrc ? (
-                  <Image
-                    alt=""
-                    className="object-contain p-2"
-                    fill
-                    sizes="88px"
-                    src={thumbSrc}
-                    unoptimized
-                  />
+                  <Image alt="" className="object-contain p-2" fill sizes="88px" src={thumbSrc} />
                 ) : (
                   <span className="absolute inset-0 bg-brand-dark" />
                 )}
@@ -82,7 +75,6 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({ media, productNa
             priority
             sizes="(max-width: 1024px) 100vw, 50vw"
             src={active.src}
-            unoptimized
           />
         )}
       </div>

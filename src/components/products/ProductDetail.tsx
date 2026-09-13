@@ -119,8 +119,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
               alt="ISO 9001 certified company"
               className="flex-shrink-0"
               height={48}
-              src="/assets/brand/iso-9001-badge.png"
-              unoptimized
+              src="/assets/brand/iso-9001-badge.webp"
               width={48}
             />
             <div>
@@ -165,7 +164,6 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     src={family.image}
-                    unoptimized
                   />
                 </div>
 

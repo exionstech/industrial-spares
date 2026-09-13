@@ -2,10 +2,10 @@ import Image from "next/image";
 import type React from "react";
 import { Button } from "@/components/ui/button";
 import { HashLink } from "@/components/ui/hash-link";
+import { familyRoute } from "@/lib/catalogue-tree";
 import {
   BRAND_INFO,
   CONTACT_ROUTE,
-  categoryRouteFor,
   DEVELOPER,
   FOOTER_COMPANY_LINKS,
   IMAGES,
@@ -27,7 +27,6 @@ export const Footer: React.FC = () => {
                   alt={BRAND_INFO.fullName}
                   fill
                   className="object-contain"
-                  unoptimized
                 />
               </div>
               <div>
@@ -71,12 +70,12 @@ export const Footer: React.FC = () => {
             <h4 className="text-brand-muted text-sm uppercase tracking-[0.18em]">Products</h4>
             <ul className="mt-4 space-y-2">
               {FOOTER_PRODUCT_LINKS.map((product) => (
-                <li key={product}>
+                <li key={product.familyId}>
                   <HashLink
                     className="text-[#d0d0d0] text-sm transition-colors hover:text-white"
-                    href={categoryRouteFor(product)}
+                    href={familyRoute(product.familyId)}
                   >
-                    {product}
+                    {product.name}
                   </HashLink>
                 </li>
               ))}

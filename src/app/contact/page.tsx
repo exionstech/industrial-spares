@@ -7,10 +7,20 @@ import { RfqSection } from "@/components/contact/RfqSection";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 
+const description =
+  "Send your requirement to Industrial Spares Manufacturing Company - ISO 9001:2015 certified manufacturer and exporter of shaft collars, couplings and precision CNC machined components from Kolkata, India.";
+
 export const metadata: Metadata = {
-  title: "Contact & RFQ | Industrial Spares Manufacturing Company",
-  description:
-    "Send your requirement to Industrial Spares Manufacturing Company - ISO 9001:2015 certified manufacturer and exporter of shaft collars, couplings and precision CNC machined components from Kolkata, India.",
+  title: "Contact & RFQ",
+  description,
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: "Contact & RFQ | Industrial Spares Manufacturing Company",
+    description,
+    url: "/contact",
+  },
 };
 
 export default function ContactPage() {

@@ -16,8 +16,7 @@ export const QualityInspection: React.FC = () => {
             className="object-contain"
             fill
             sizes="(max-width: 1024px) 100vw, 460px"
-            src="/assets/about/iso-certificate.jpg"
-            unoptimized
+            src="/assets/about/iso-certificate.webp"
           />
         </div>
 
@@ -33,8 +32,7 @@ export const QualityInspection: React.FC = () => {
               className="object-contain"
               fill
               sizes="100vw"
-              src="/assets/about/iso-certificate.jpg"
-              unoptimized
+              src="/assets/about/iso-certificate.webp"
             />
           </div>
 

@@ -22,13 +22,12 @@ export const ContactHero: React.FC = () => {
       {/* Photo bleeds to the right edge of the screen */}
       <div className="relative min-h-[320px] bg-brand-dark lg:min-h-[468px]">
         <Image
-          src="/assets/contact/hero.jpg"
+          src="/assets/contact/hero.webp"
           alt="Turning operation throwing sparks on the machine shop floor"
           fill
           sizes="(max-width: 1024px) 100vw, 45vw"
           priority
           className="object-cover object-center"
-          unoptimized
         />
         <span className="absolute right-6 bottom-6 left-6 text-white text-xs uppercase tracking-[0.1em] sm:right-8 sm:bottom-8 sm:left-8 sm:text-sm">
           Precision Engineering &amp; Global Export · Kolkata

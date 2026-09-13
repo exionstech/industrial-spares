@@ -1,6 +1,9 @@
 import type { CollarConfiguration, ShaftCollar } from "@/lib/product-catalogue";
 import { SHAFT_COLLARS } from "@/lib/product-catalogue";
 
+/* Canonical production origin - used for metadataBase, canonical tags, the sitemap and robots.txt. */
+export const SITE_URL = "https://industrialsparesfromindia.com";
+
 export const BRAND_INFO = {
   name: "INDUSTRIAL SPARES",
   fullName: "INDUSTRIAL SPARES MANUFACTURING COMPANY",
@@ -14,28 +17,28 @@ export const BRAND_INFO = {
 };
 
 export const IMAGES = {
-  logo: "/assets/brand/logo.png",
-  cert1: "/assets/brand/cert-iso-1.png",
-  cert2: "/assets/brand/cert-iso-2.png",
-  cert3: "/assets/brand/cert-iso-3.png",
-  contactWelder: "/assets/team/contact-welder.jpg",
+  logo: "/assets/brand/logo.webp",
+  cert1: "/assets/brand/cert-iso-1.webp",
+  cert2: "/assets/brand/cert-iso-2.webp",
+  cert3: "/assets/brand/cert-iso-3.webp",
+  contactWelder: "/assets/team/contact-welder.webp",
 };
 
 /* Hero carousel - full-bleed rounded photo band directly under the navbar. */
 export const HERO_SLIDES = [
   {
     id: "shop-floor",
-    image: "/assets/hero/hero-1.jpg",
+    image: "/assets/hero/hero-1.webp",
     alt: "Machinists working a press on the Industrial Spares shop floor",
   },
   {
     id: "plant",
-    image: "/assets/hero/hero-2.jpg",
+    image: "/assets/hero/hero-2.webp",
     alt: "Production line running on the manufacturing plant floor",
   },
   {
     id: "export",
-    image: "/assets/hero/hero-3.jpg",
+    image: "/assets/hero/hero-3.webp",
     alt: "Containers being loaded at port for export shipment",
   },
 ];
@@ -196,14 +199,14 @@ export const MILESTONES = [
 export const FACILITY_MEDIA = [
   {
     id: "cnc",
-    image: "/assets/about/cnc-floor.jpg",
+    image: "/assets/about/cnc-floor.webp",
     videoUrl: "/assets/about/placeholder-cnc.mp4",
     title: "CNC Machining & Turning Floor",
     description: "A look at our automated turning centres producing high-tolerance shaft collars.",
   },
   {
     id: "inspection",
-    image: "/assets/about/inspection.jpg",
+    image: "/assets/about/inspection.webp",
     videoUrl: "/assets/about/placeholder-inspection.mp4",
     title: "Quality Inspection & Dimensional Testing",
     description:

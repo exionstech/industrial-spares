@@ -21,8 +21,7 @@ export const Experience: React.FC = () => {
             className="object-cover object-center"
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
-            src="/assets/about/heavy-engineering.jpg"
-            unoptimized
+            src="/assets/about/heavy-engineering.webp"
           />
         </div>
 

@@ -77,7 +77,6 @@ export const Navbar: React.FC = () => {
               fill
               priority
               src={IMAGES.logo}
-              unoptimized
             />
           </div>
         </Link>
@@ -153,13 +152,7 @@ export const Navbar: React.FC = () => {
               href="/#home"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <Image
-                alt={BRAND_INFO.fullName}
-                className="object-contain"
-                fill
-                src={IMAGES.logo}
-                unoptimized
-              />
+              <Image alt={BRAND_INFO.fullName} className="object-contain" fill src={IMAGES.logo} />
             </Link>
 
             <button
