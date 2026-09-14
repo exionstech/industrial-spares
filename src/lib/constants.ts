@@ -74,10 +74,6 @@ export const FOOTER_COMPANY_LINKS = [
   { name: "Contact", href: CONTACT_ROUTE },
 ];
 
-/* Filters the catalogue. */
-export const categoryRouteFor = (category: string) =>
-  `${PRODUCTS_ROUTE}?category=${encodeURIComponent(category)}`;
-
 /* Scrolls the catalogue to a product family without filtering it. */
 export const catalogueScrollRouteFor = (category: string) =>
   `${PRODUCTS_ROUTE}?scrollTo=${encodeURIComponent(category)}`;
@@ -388,7 +384,6 @@ export {
   FOOTER_PRODUCT_LINKS,
   MATERIALS,
   mediaFor,
-  OTHER_PRODUCT_FAMILIES,
   OTHER_PRODUCTS,
   PRODUCT_CATEGORIES,
   SHAFT_COLLARS,

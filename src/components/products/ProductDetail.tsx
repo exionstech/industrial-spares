@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
@@ -10,14 +10,7 @@ import { ProductSpecifications } from "@/components/products/ProductSpecificatio
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionEyebrow } from "@/components/ui/section-eyebrow";
-import {
-  categoryRouteFor,
-  contactRouteFor,
-  mediaFor,
-  PRODUCTS_ROUTE,
-  type ShaftCollar,
-} from "@/lib/constants";
-import { OTHER_PRODUCT_FAMILIES } from "@/lib/product-catalogue";
+import { contactRouteFor, mediaFor, PRODUCTS_ROUTE, type ShaftCollar } from "@/lib/constants";
 
 interface ProductDetailProps {
   product: ShaftCollar;
@@ -129,55 +122,6 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                 processes.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Other products */}
-      <section className="border-brand-line border-t bg-white py-16 lg:py-20">
-        <div className="mx-auto max-w-shell px-4 sm:px-8">
-          <SectionEyebrow>Explore More</SectionEyebrow>
-          <h2 className="mt-3 font-medium text-[30px] text-brand-dark tracking-tight">
-            Other Products
-          </h2>
-
-          <div className="mt-10 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
-            {OTHER_PRODUCT_FAMILIES.map((family, index) => (
-              <Link
-                className="group flex flex-col border border-brand-line bg-white transition-colors hover:border-brand-red"
-                href={categoryRouteFor(family.category)}
-                key={family.id}
-              >
-                <div className="flex items-center justify-between gap-3 px-6 pt-6">
-                  <span className="font-medium text-brand-red text-lg">
-                    {String(index + 2).padStart(2, "0")}
-                  </span>
-                  <span className="border border-brand-line px-2.5 py-1 text-brand-muted text-xs uppercase tracking-[0.08em]">
-                    Manufacturing Co.
-                  </span>
-                </div>
-
-                <div className="relative mt-5 aspect-[412/180] w-full overflow-hidden bg-[#fafafa]">
-                  <Image
-                    alt={family.title}
-                    className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    src={family.image}
-                  />
-                </div>
-
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="font-medium text-base text-brand-dark uppercase tracking-[0.02em]">
-                    {family.title}
-                  </h3>
-                  <span className="mt-auto flex items-center gap-2 pt-6 text-brand-red text-sm uppercase tracking-[0.08em]">
-                    View Product
-                    <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-                  </span>
-                </div>
-              </Link>
-            ))}
           </div>
         </div>
       </section>

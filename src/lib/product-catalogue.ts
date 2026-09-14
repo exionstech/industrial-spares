@@ -229,27 +229,6 @@ export const OTHER_PRODUCTS = [
   },
 ] as const;
 
-export const OTHER_PRODUCT_FAMILIES = [
-  {
-    id: "single-double-split-collar",
-    title: "Single & Double Split Collar",
-    image: "/assets/products/single-double-split-collar.webp",
-    category: "Shaft Collars",
-  },
-  {
-    id: "rigid-coupling",
-    title: "Rigid Coupling",
-    image: "/assets/products/rigid-coupling.webp",
-    category: "Couplings",
-  },
-  {
-    id: "split-coupling",
-    title: "Split Coupling",
-    image: "/assets/products/split-coupling.webp",
-    category: "Couplings",
-  },
-] as const;
-
 /*
  * Homepage product overview. The homepage introduces the three families we
  * manufacture and stops there - type -> material -> catalogue navigation is the
