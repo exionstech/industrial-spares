@@ -5,43 +5,7 @@
  * inferred from the siblings - they are not client data, unlike catalogue-tables.
  */
 
-/* Imperial collars - solid and split alike. */
-const COLLAR_IMPERIAL = [
-  "ISP Part No",
-  "Bore Size (in)",
-  "I.D. (in)",
-  "O.D. (in)",
-  "Width (in)",
-  "Screw Size",
-  "Screw Length",
-] as const;
-
-/* Metric solid collars: set screws, and no screw length in the client's sheets. */
-const COLLAR_METRIC_SOLID = [
-  "ISP Part No",
-  "I.D. (mm)",
-  "O.D. (mm)",
-  "Width (mm)",
-  "Set Screw Size",
-] as const;
-
-/* Threaded bores are specified by thread, so no bore diameter column. */
-const COLLAR_THREADED = [
-  "ISP Part No",
-  "Thread Size",
-  "I.D. Thread",
-  "O.D. (in)",
-  "Width (in)",
-  "Cap Screw Size",
-  "Screw Length",
-] as const;
-
-const PENDING_COLUMNS: Record<string, readonly string[]> = {
-  "shaft-collars/solid/black-oxide-imperial": COLLAR_IMPERIAL,
-  "shaft-collars/solid/stainless-steel-metric": COLLAR_METRIC_SOLID,
-  "shaft-collars/threaded-bore/stainless-steel-316-imperial": COLLAR_THREADED,
-  "shaft-collars/threaded-bore/aluminium-imperial": COLLAR_THREADED,
-};
+const PENDING_COLUMNS: Record<string, readonly string[]> = {};
 
 export const pendingColumnsFor = (
   familyId: string,

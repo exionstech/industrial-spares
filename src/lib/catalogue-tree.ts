@@ -59,11 +59,6 @@ const SOLID_VARIANTS = [
     image: SOLID_STAINLESS,
   },
   { id: "aluminium", name: "Aluminium", image: photo("Solid Collar Aluminium") },
-  {
-    id: "black-oxide-imperial",
-    name: "Black Oxide Imperial",
-    image: photo("Solid Collars_ Black Oxide Imperial"),
-  },
   { id: "black-oxide-metric", name: "Black Oxide Metric", image: SOLID_BLACK_OXIDE },
   { id: "stainless-steel-metric", name: "Stainless Steel Metric", image: SOLID_STAINLESS },
 ] as const;
@@ -109,25 +104,21 @@ const DOUBLE_SPLIT_VARIANTS = [
   { id: "black-oxide-metric", name: "Black Oxide Metric", image: DOUBLE_SPLIT_BLACK_OXIDE },
 ] as const;
 
+/* Client confirmed: no Imperial/Metric or 304/316 split here - just Single Split in these three finishes. */
 const THREADED_BORE_VARIANTS = [
   {
-    id: "black-oxide-imperial",
-    name: "Black Oxide Imperial",
-    image: photo("Threaded bore shaft collar BLACK OXIDE"),
-  },
-  {
-    id: "stainless-steel-304-imperial",
-    name: "Stainless Steel 304 Imperial",
+    id: "stainless-steel",
+    name: "Single Split - Stainless Steel",
     image: photo("Threaded bore shaft collar stainless steel"),
   },
   {
-    id: "stainless-steel-316-imperial",
-    name: "Stainless Steel 316 Imperial",
-    image: photo("Stainless Steel Imperial Threaded Bore"),
+    id: "black-oxide",
+    name: "Single Split - Black Oxide",
+    image: photo("Threaded bore shaft collar BLACK OXIDE"),
   },
   {
-    id: "aluminium-imperial",
-    name: "Aluminium Imperial",
+    id: "aluminium",
+    name: "Single Split - Aluminium",
     image: photo("Threaded Bore_ Aluminium Imperial"),
   },
 ] as const;
