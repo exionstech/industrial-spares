@@ -176,59 +176,6 @@ export const FOOTER_PRODUCT_LINKS = [
   { name: "CNC Components", familyId: "other-cnc-products" },
 ] as const;
 
-export const MATERIALS = ["Black Oxide", "Mild Steel", "Stainless Steel", "Aluminium", "Plastic"];
-
-export const CORE_PRODUCTS = [
-  {
-    id: "shaft-collars",
-    title: "Shaft Collars",
-    description:
-      "Precision engineered shaft collars manufactured to exact tolerances. Available in solid/set, single split, and double split configurations - in multiple materials and surface finishes.",
-    image: "/assets/products/shaft-collars.webp",
-    badges: ["Set Collar", "Single Split", "Double Split"],
-    features: [
-      { title: "Set / Solid Collar", desc: "Single-piece, tightened by set screw" },
-      { title: "Single Split Collar", desc: "Two-bolt split for quick installation" },
-      { title: "Double Split Collar", desc: "Heavy-duty two-piece design" },
-    ],
-    ctaText: "EXPLORE SHAFT COLLARS",
-  },
-  {
-    id: "couplings",
-    title: "Couplings",
-    description:
-      "Precision machined couplings designed for reliable power transmission. Rigid and split coupling designs for varied industrial applications.",
-    image: "/assets/products/couplings.webp",
-    badges: ["Rigid Coupling", "Split Coupling"],
-    features: [
-      { title: "Rigid Coupling", desc: "Fixed connection for aligned shafts" },
-      { title: "Split Coupling", desc: "Easy installation without shaft removal" },
-    ],
-    ctaText: "EXPLORE COUPLINGS",
-  },
-] as const;
-
-export const OTHER_PRODUCTS = [
-  {
-    id: "cnc",
-    title: "CNC Components",
-    image: "/assets/products/cnc-components.webp",
-    description: "High-precision CNC turned and milled components to custom prints.",
-  },
-  {
-    id: "valves",
-    title: "Valves",
-    image: "/assets/products/valves.webp",
-    description: "Heavy-duty industrial valve bodies and precision sub-assemblies.",
-  },
-  {
-    id: "other",
-    title: "Other Machine Parts",
-    image: "/assets/products/other-machine-parts.webp",
-    description: "Custom machined industrial spares, bushings, and power transmission parts.",
-  },
-] as const;
-
 /*
  * Homepage product overview. The homepage introduces the three families we
  * manufacture and stops there - type -> material -> catalogue navigation is the

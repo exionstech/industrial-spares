@@ -1,4 +1,3 @@
-import type { CollarConfiguration, ShaftCollar } from "@/lib/product-catalogue";
 import { SHAFT_COLLARS } from "@/lib/product-catalogue";
 
 /* Canonical production origin - used for metadataBase, canonical tags, the sitemap and robots.txt. */
@@ -73,10 +72,6 @@ export const FOOTER_COMPANY_LINKS = [
   { name: "Quality", href: QUALITY_ANCHOR },
   { name: "Contact", href: CONTACT_ROUTE },
 ];
-
-/* Scrolls the catalogue to a product family without filtering it. */
-export const catalogueScrollRouteFor = (category: string) =>
-  `${PRODUCTS_ROUTE}?scrollTo=${encodeURIComponent(category)}`;
 
 export const LEGAL_LINKS = [{ name: "Privacy Policy", href: "/privacy-policy" }];
 
@@ -233,12 +228,6 @@ export const CAPABILITIES = [
   },
 ] as const;
 
-export const EXPERIENCE_STATS = [
-  { value: "30+", label: "Years" },
-  { value: "Export", label: "Experience" },
-  { value: "Kolkata", label: "India" },
-];
-
 export const APPLICATIONS = [
   {
     icon: "conveyor",
@@ -380,11 +369,8 @@ export {
   CATALOGUE_CATEGORIES,
   COLLAR_CONFIGURATIONS,
   COLLAR_MATERIALS,
-  CORE_PRODUCTS,
   FOOTER_PRODUCT_LINKS,
-  MATERIALS,
   mediaFor,
-  OTHER_PRODUCTS,
   PRODUCT_CATEGORIES,
   SHAFT_COLLARS,
 } from "@/lib/product-catalogue";
@@ -411,17 +397,5 @@ export const slugify = (value: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
-export const productRouteFor = (product: ShaftCollar) =>
-  `${PRODUCTS_ROUTE}/${slugify(product.name)}`;
-
 export const findProductBySlug = (slug: string) =>
   SHAFT_COLLARS.find((product) => slugify(product.name) === slug);
-
-/* How each configuration is described on the product page. */
-export const CONFIGURATION_NOTES: Record<CollarConfiguration, string> = {
-  Solid: "Single-piece collar tightened onto the shaft by set screw.",
-  "Single Split":
-    "Split on one side and closed by a clamp screw, so it locates without marking the shaft and can be removed without dismantling the assembly.",
-  "Double Split":
-    "Two-piece clamping collar that installs and removes without taking the shaft out of the machine, giving the highest holding power of the three.",
-};
