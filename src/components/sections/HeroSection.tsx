@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import type React from "react";
-import { useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { HERO_SLIDES } from "@/lib/constants";
 
-const SLIDE_INTERVAL_MS = 6000;
+const SLIDE_INTERVAL_MS = 4000;
 
 /* Navbar (92) + section padding (30 + 20) + pager block (44). */
 const HERO_CHROME_PX = 186;
@@ -68,17 +68,27 @@ export const HeroSection: React.FC = () => {
           style={{ "--hero-chrome": `${HERO_CHROME_PX}px` } as React.CSSProperties}
         >
           {HERO_SLIDES.map((slide, index) => (
-            <Image
-              key={slide.id}
-              src={slide.image}
-              alt={slide.alt}
-              fill
-              sizes="100vw"
-              priority={index === 0}
-              /* Off-screen slides still decode up front so a rotation never flashes empty. */
-              loading={index === 0 ? undefined : "eager"}
-              className={`object-cover object-center ${layerClass(index)}`}
-            />
+            <Fragment key={slide.id}>
+              <Image
+                src={slide.mobileImage}
+                alt={slide.alt}
+                fill
+                sizes="100vw"
+                priority={index === 0}
+                /* Off-screen slides still decode up front so a rotation never flashes empty. */
+                loading={index === 0 ? undefined : "eager"}
+                className={`block object-cover object-center sm:hidden ${layerClass(index)}`}
+              />
+              <Image
+                src={slide.image}
+                alt={slide.alt}
+                fill
+                sizes="100vw"
+                priority={index === 0}
+                loading={index === 0 ? undefined : "eager"}
+                className={`hidden object-cover object-center sm:block ${layerClass(index)}`}
+              />
+            </Fragment>
           ))}
         </div>
       </div>

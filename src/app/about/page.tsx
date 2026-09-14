@@ -3,7 +3,6 @@ import { AboutHero } from "@/components/about/AboutHero";
 import { Applications } from "@/components/about/Applications";
 import { Capabilities } from "@/components/about/Capabilities";
 import { Experience } from "@/components/about/Experience";
-import { InsideManufacturing } from "@/components/about/InsideManufacturing";
 import { OurApproach } from "@/components/about/OurApproach";
 import { OurStory } from "@/components/about/OurStory";
 import { QualityInspection } from "@/components/about/QualityInspection";
@@ -36,7 +35,6 @@ export default function AboutPage() {
       <div className="flex-1">
         <AboutHero />
         <OurStory />
-        <InsideManufacturing />
         <Capabilities />
         <QualityInspection />
         <Experience />

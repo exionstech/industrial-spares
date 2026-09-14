@@ -78,7 +78,7 @@ const OtherCncCard: React.FC = () => (
     title={HOME_OTHER_CNC_PRODUCTS.title}
     footer={
       <Button
-        className="w-full"
+        className="h-auto min-h-11 w-full whitespace-normal py-3 text-center leading-tight"
         href={familyRoute(HOME_OTHER_CNC_PRODUCTS.id)}
         showArrow={false}
         size="cta"

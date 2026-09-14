@@ -1,3 +1,4 @@
+import { Instagram } from "lucide-react";
 import Image from "next/image";
 import type React from "react";
 import { Button } from "@/components/ui/button";
@@ -10,14 +11,20 @@ import {
   FOOTER_COMPANY_LINKS,
   IMAGES,
   LEGAL_LINKS,
+  SOCIAL_LINKS,
 } from "@/lib/constants";
 import { FOOTER_PRODUCT_LINKS } from "@/lib/product-catalogue";
+
+/* Only Instagram for now - extend as more platforms are added. */
+const SOCIAL_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  Instagram,
+};
 
 export const Footer: React.FC = () => {
   return (
     <footer className="bg-brand-dark pt-[50px] pb-9 text-white">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-8">
-        <div className="grid grid-cols-1 gap-x-8 gap-y-12 pb-[45px] sm:grid-cols-2 lg:grid-cols-[1.55fr_0.9fr_0.9fr_1fr] lg:gap-x-12 xl:gap-x-16">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-12 pb-[45px] sm:grid-cols-2 lg:grid-cols-[1.35fr_0.8fr_0.8fr_0.65fr_1fr] lg:gap-x-10 xl:gap-x-14">
           {/* Brand column */}
           <div className="lg:max-w-[420px]">
             <div className="flex items-center gap-2">
@@ -79,6 +86,29 @@ export const Footer: React.FC = () => {
                   </HashLink>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          {/* Socials */}
+          <div>
+            <h4 className="text-brand-muted text-sm uppercase tracking-[0.18em]">Socials</h4>
+            <ul className="mt-4 space-y-2">
+              {SOCIAL_LINKS.map((link) => {
+                const Icon = SOCIAL_ICONS[link.name];
+                return (
+                  <li key={link.name}>
+                    <a
+                      className="flex items-center gap-2 text-[#d0d0d0] text-sm transition-colors hover:text-white"
+                      href={link.href}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {Icon && <Icon className="h-4 w-4" />}
+                      {link.name}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 

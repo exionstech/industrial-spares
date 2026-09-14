@@ -28,17 +28,32 @@ export const HERO_SLIDES = [
   {
     id: "shop-floor",
     image: "/assets/hero/hero-1.webp",
-    alt: "Machinists working a press on the Industrial Spares shop floor",
+    mobileImage: "/assets/hero/mobile-hero-1.webp",
+    alt: "CNC turning center on the Industrial Spares Manufacturing Co. shop floor",
   },
   {
-    id: "plant",
+    id: "export-packing",
     image: "/assets/hero/hero-2.webp",
-    alt: "Production line running on the manufacturing plant floor",
+    mobileImage: "/assets/hero/mobile-hero-2.webp",
+    alt: "Finished goods shrink-wrapped and palletized for export at the loading bay",
   },
   {
-    id: "export",
+    id: "export-staging",
     image: "/assets/hero/hero-3.webp",
-    alt: "Containers being loaded at port for export shipment",
+    mobileImage: "/assets/hero/mobile-hero-3.webp",
+    alt: "Export crates staged inside the workshop ahead of dispatch",
+  },
+  {
+    id: "dispatch",
+    image: "/assets/hero/hero-4.webp",
+    mobileImage: "/assets/hero/mobile-hero-4.webp",
+    alt: "Delivery truck at the Industrial Spares Manufacturing Co. facility gate",
+  },
+  {
+    id: "cnc-operator",
+    image: "/assets/hero/hero-5.webp",
+    mobileImage: "/assets/hero/mobile-hero-5.webp",
+    alt: "Operator running a CNC machining center on the shop floor",
   },
 ];
 
@@ -71,6 +86,10 @@ export const FOOTER_COMPANY_LINKS = [
   { name: "Products", href: PRODUCTS_ROUTE },
   { name: "Quality", href: QUALITY_ANCHOR },
   { name: "Contact", href: CONTACT_ROUTE },
+];
+
+export const SOCIAL_LINKS = [
+  { name: "Instagram", href: "https://www.instagram.com/industrialsparesmfg" },
 ];
 
 export const LEGAL_LINKS = [{ name: "Privacy Policy", href: "/privacy-policy" }];
@@ -187,24 +206,6 @@ export const MILESTONES = [
  * videoUrl points at self-hosted placeholder clips - swap the files in
  * public/assets/about/ for the real facility footage before launch.
  */
-export const FACILITY_MEDIA = [
-  {
-    id: "cnc",
-    image: "/assets/about/cnc-floor.webp",
-    videoUrl: "/assets/about/placeholder-cnc.mp4",
-    title: "CNC Machining & Turning Floor",
-    description: "A look at our automated turning centres producing high-tolerance shaft collars.",
-  },
-  {
-    id: "inspection",
-    image: "/assets/about/inspection.webp",
-    videoUrl: "/assets/about/placeholder-inspection.mp4",
-    title: "Quality Inspection & Dimensional Testing",
-    description:
-      "Our quality team performing rigorous micrometric and laser testing on exported couplings.",
-  },
-];
-
 export const CAPABILITIES = [
   {
     icon: "settings",
