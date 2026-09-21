@@ -1,16 +1,35 @@
 "use client";
 
-import { CheckCircle2, CloudUpload, Plus, X } from "lucide-react";
+import { useForm } from "@formspree/react";
+import { CheckCircle2, X } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import type React from "react";
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { CategoryMultiSelect } from "@/components/contact/CategoryMultiSelect";
 import { CountrySelect } from "@/components/contact/CountrySelect";
 import { Button } from "@/components/ui/button";
 import { PRODUCT_CATEGORIES } from "@/lib/product-catalogue";
+import "@uploadthing/react/styles.css";
+import { UploadDropzone } from "@/lib/uploadthing";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const ACCEPTED_FILES = ".pdf,.jpg,.jpeg,.png,.dwg,.dxf,.step,.stp,.igs,.iges";
+const ACCEPTED_EXTENSIONS = [
+  "pdf",
+  "jpg",
+  "jpeg",
+  "png",
+  "dwg",
+  "dxf",
+  "step",
+  "stp",
+  "igs",
+  "iges",
+];
+
+interface UploadedFile {
+  name: string;
+  url: string;
+}
 
 type FieldName =
   | "fullName"
@@ -70,9 +89,9 @@ interface RfqFormProps {
 }
 
 export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
+  const [formspreeState, formspreeHandleSubmit] = useForm("mqpaqewp");
   const searchParams = useSearchParams();
   const fieldId = useId();
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [values, setValues] = useState({
     ...EMPTY_FORM,
@@ -81,10 +100,15 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
   });
   const [categories, setCategories] = useState<string[]>([]);
   const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({});
-  const [files, setFiles] = useState<File[]>([]);
-  const [isDragging, setIsDragging] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [files, setFiles] = useState<UploadedFile[]>([]);
+  const [uploadError, setUploadError] = useState("");
   const [isSent, setIsSent] = useState(false);
+
+  useEffect(() => {
+    if (formspreeState.succeeded) {
+      setIsSent(true);
+    }
+  }, [formspreeState.succeeded]);
 
   const idFor = (name: string) => `${fieldId}-${name}`;
 
@@ -121,12 +145,11 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
       return;
     }
 
-    /* No backend yet - this is where the enquiry would be posted. */
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSent(true);
-    }, 600);
+    /* Files are already on UploadThing; the email carries their links. */
+    const payload = new FormData(event.currentTarget);
+    payload.set("attachments", files.map((item) => `${item.name}: ${item.url}`).join("\n"));
+
+    void formspreeHandleSubmit(payload);
   };
 
   const resetForm = () => {
@@ -137,39 +160,19 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
     setIsSent(false);
   };
 
-  const keyFor = (candidate: File) =>
-    `${candidate.name}-${candidate.size}-${candidate.lastModified}`;
-
-  /* Appends rather than replaces, skipping files already on the list. */
-  const addFiles = (incoming: FileList | null) => {
-    if (!incoming?.length) {
-      return;
-    }
-    /*
-     * Copy out before touching the input: a FileList is live, so clearing the
-     * input's value would empty it before the state updater reads it.
-     */
-    const picked = Array.from(incoming);
-
-    /* Clearing lets the same file be re-picked after removal. */
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
-
-    setFiles((current) => {
-      const seen = new Set(current.map(keyFor));
-      return [...current, ...picked.filter((candidate) => !seen.has(keyFor(candidate)))];
-    });
+  const removeFile = (target: UploadedFile) => {
+    setFiles((current) => current.filter((candidate) => candidate.url !== target.url));
   };
 
-  const removeFile = (target: File) => {
-    setFiles((current) => current.filter((candidate) => keyFor(candidate) !== keyFor(target)));
-  };
-
-  const handleDrop = (event: React.DragEvent<HTMLElement>) => {
-    event.preventDefault();
-    setIsDragging(false);
-    addFiles(event.dataTransfer.files);
+  /* Only the drawing/document formats we accept; UploadThing's "blob" allows anything. */
+  const filterAllowed = (picked: File[]) => {
+    const allowed = picked.filter((candidate) =>
+      ACCEPTED_EXTENSIONS.includes(candidate.name.split(".").pop()?.toLowerCase() ?? ""),
+    );
+    if (allowed.length < picked.length) {
+      setUploadError(`Unsupported file skipped. Accepted: ${ACCEPTED_EXTENSIONS.join(", ")}.`);
+    }
+    return allowed;
   };
 
   if (isSent) {
@@ -205,6 +208,7 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
             autoComplete="name"
             className={fieldClasses}
             id={idFor("fullName")}
+            name="fullName"
             onChange={(e) => setValue("fullName", e.target.value)}
             placeholder="e.g. Rajesh Kumar"
             type="text"
@@ -217,6 +221,7 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
             autoComplete="organization"
             className={fieldClasses}
             id={idFor("company")}
+            name="company"
             onChange={(e) => setValue("company", e.target.value)}
             placeholder="e.g. Apex Engineering Ltd"
             type="text"
@@ -229,6 +234,7 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
             autoComplete="email"
             className={fieldClasses}
             id={idFor("email")}
+            name="email"
             onChange={(e) => setValue("email", e.target.value)}
             placeholder="e.g. procurement@apex.com"
             type="email"
@@ -241,6 +247,7 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
             autoComplete="tel"
             className={fieldClasses}
             id={idFor("phone")}
+            name="phone"
             onChange={(e) => setValue("phone", e.target.value)}
             placeholder="e.g. +91 98300 XXXXX"
             type="tel"
@@ -255,12 +262,14 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
             options={countries}
             value={values.country}
           />
+          <input name="country" type="hidden" value={values.country} />
         </Field>
 
         <Field error={errors.product} id={idFor("product")} label="Product / Requirement" required>
           <input
             className={fieldClasses}
             id={idFor("product")}
+            name="product"
             onChange={(e) => setValue("product", e.target.value)}
             placeholder="e.g. 25mm Shaft Collar"
             type="text"
@@ -280,6 +289,7 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
               placeholder="Select categories..."
               selected={categories}
             />
+            <input name="categories" type="hidden" value={categories.join(", ")} />
           </div>
         </div>
 
@@ -287,6 +297,7 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
           <input
             className={fieldClasses}
             id={idFor("material")}
+            name="material"
             onChange={(e) => setValue("material", e.target.value)}
             placeholder="e.g. Stainless Steel 304, Carbon Steel"
             type="text"
@@ -299,6 +310,7 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
             <input
               className={fieldClasses}
               id={idFor("quantity")}
+              name="quantity"
               onChange={(e) => setValue("quantity", e.target.value)}
               placeholder="e.g. 5,000 units / Monthly repeat"
               type="text"
@@ -312,6 +324,7 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
             <textarea
               className={`${fieldClasses} h-auto min-h-[120px] resize-y py-3`}
               id={idFor("message")}
+              name="message"
               onChange={(e) => setValue("message", e.target.value)}
               placeholder="Specify key dimensional parameters, tolerances, keyways, plating requirements, etc."
               rows={4}
@@ -321,14 +334,14 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
         </div>
       </div>
 
-      {/* Drawing upload - any number of files */}
+      {/* Drawing upload - files go straight to UploadThing; only their URLs are submitted */}
       <div className="mt-9">
         {files.length > 0 && (
           <ul className="mb-3 space-y-2">
             {files.map((item) => (
               <li
                 className="flex items-center justify-between gap-4 border border-brand-line bg-white px-4 py-3"
-                key={keyFor(item)}
+                key={item.url}
               >
                 <span className="truncate text-brand-dark text-sm">{item.name}</span>
                 <button
@@ -344,49 +357,55 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
           </ul>
         )}
 
-        <label
-          className={`flex cursor-pointer flex-col items-center border border-dashed text-center transition-colors ${
-            files.length > 0 ? "px-6 py-5" : "px-6 py-9"
-          } ${isDragging ? "border-brand-red bg-white" : "border-[#9ca3af]"}`}
-          htmlFor={idFor("file")}
-          onDragLeave={() => setIsDragging(false)}
-          onDragOver={(e) => {
-            e.preventDefault();
-            setIsDragging(true);
+        <UploadDropzone
+          appearance={{
+            container: "rounded-none border border-dashed border-[#9ca3af] bg-transparent py-6",
+            label: "text-brand-dark text-sm uppercase tracking-[0.08em]",
+            allowedContent: "text-[#4a4a4a] text-sm",
+            button: "rounded-none bg-brand-red text-sm",
           }}
-          onDrop={handleDrop}
-        >
-          {files.length > 0 ? (
-            <span className="flex items-center gap-2 text-brand-dark text-sm">
-              <Plus className="h-4 w-4 text-brand-red" />
-              Add another file
-            </span>
-          ) : (
-            <>
-              <CloudUpload className="h-6 w-6 text-brand-red" />
-              <span className="mt-3 text-brand-dark text-sm uppercase tracking-[0.08em]">
-                Upload Drawing / Document
-              </span>
-              <span className="mt-2 text-[#4a4a4a] text-sm">
-                Upload a technical drawing, blueprint or specification if available. PDF / JPG / PNG
-                / CAD
-              </span>
-            </>
-          )}
-          <input
-            accept={ACCEPTED_FILES}
-            className="sr-only"
-            id={idFor("file")}
-            multiple
-            onChange={(e) => addFiles(e.target.files)}
-            ref={fileInputRef}
-            type="file"
-          />
-        </label>
+          content={{
+            label: "Upload Drawing / Document",
+            allowedContent: "PDF / JPG / PNG / CAD - up to 5 files, 16MB each",
+          }}
+          config={{ mode: "auto" }}
+          endpoint="rfqAttachment"
+          onBeforeUploadBegin={(picked) => {
+            setUploadError("");
+            return filterAllowed(picked);
+          }}
+          onClientUploadComplete={(uploaded) => {
+            setFiles((current) => {
+              const seen = new Set(current.map((item) => item.url));
+              const added = uploaded
+                .filter((item) => !seen.has(item.ufsUrl))
+                .map((item) => ({ name: item.name, url: item.ufsUrl }));
+              return [...current, ...added];
+            });
+          }}
+          onUploadError={(error) => setUploadError(`Upload failed: ${error.message}`)}
+        />
+        {uploadError && (
+          <p className="mt-2 text-brand-red text-xs" role="alert">
+            {uploadError}
+          </p>
+        )}
       </div>
 
-      <Button className="mt-9" disabled={isSubmitting} size="cta" type="submit" variant="primary">
-        {isSubmitting ? "Sending..." : "Send Enquiry"}
+      {formspreeState.errors && (
+        <p className="mt-5 text-brand-red text-sm" role="alert">
+          We could not send your enquiry. Please check the form and try again.
+        </p>
+      )}
+
+      <Button
+        className="mt-9"
+        disabled={formspreeState.submitting}
+        size="cta"
+        type="submit"
+        variant="primary"
+      >
+        {formspreeState.submitting ? "Sending..." : "Send Enquiry"}
       </Button>
     </form>
   );
