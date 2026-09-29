@@ -2,6 +2,7 @@
 
 import { useForm } from "@formspree/react";
 import { CheckCircle2, X } from "lucide-react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import type React from "react";
 import { useEffect, useId, useState } from "react";
@@ -103,6 +104,8 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const [uploadError, setUploadError] = useState("");
   const [isSent, setIsSent] = useState(false);
+  const [consent, setConsent] = useState(false);
+  const [consentError, setConsentError] = useState("");
 
   useEffect(() => {
     if (formspreeState.succeeded) {
@@ -141,7 +144,10 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
     event.preventDefault();
     const found = validate();
     setErrors(found);
-    if (Object.keys(found).length > 0) {
+    if (!consent) {
+      setConsentError("Please confirm you have read and accept the Privacy Policy.");
+    }
+    if (Object.keys(found).length > 0 || !consent) {
       return;
     }
 
@@ -158,6 +164,8 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
     setErrors({});
     setFiles([]);
     setIsSent(false);
+    setConsent(false);
+    setConsentError("");
   };
 
   const removeFile = (target: UploadedFile) => {
@@ -388,6 +396,42 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
         {uploadError && (
           <p className="mt-2 text-brand-red text-xs" role="alert">
             {uploadError}
+          </p>
+        )}
+      </div>
+
+      <div className="mt-9">
+        <label className="flex items-start gap-3 text-[#4a4a4a] text-sm" htmlFor={idFor("consent")}>
+          <input
+            checked={consent}
+            className="mt-0.5 h-4 w-4 flex-shrink-0 accent-brand-red"
+            id={idFor("consent")}
+            name="consent"
+            onChange={(e) => {
+              setConsent(e.target.checked);
+              if (e.target.checked) {
+                setConsentError("");
+              }
+            }}
+            type="checkbox"
+          />
+          <span>
+            I have read and accept the{" "}
+            <Link
+              className="text-brand-red underline-offset-4 hover:underline"
+              href="/privacy-policy"
+              target="_blank"
+            >
+              Privacy Policy
+            </Link>
+            , and I consent to Industrial Spares Manufacturing Company collecting and processing the
+            information and files submitted above, including sharing them with our form-processing
+            and file-storage providers, to respond to this enquiry.
+          </span>
+        </label>
+        {consentError && (
+          <p className="mt-1.5 text-brand-red text-xs" role="alert">
+            {consentError}
           </p>
         )}
       </div>

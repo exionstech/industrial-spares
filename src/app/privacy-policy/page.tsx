@@ -34,7 +34,8 @@ const infoSections = [
     title: "Data Storage and Security",
     content: [
       "We take reasonable measures to protect the information provided to us and to prevent unauthorised access, disclosure, alteration, or misuse of such information.",
-      "Information provided through our Website or during business communications may be retained for as long as reasonably necessary to respond to enquiries, provide services, maintain business records, or fulfil applicable legal and business requirements.",
+      "Information provided through our Website or during business communications is retained for up to 3 years from the date of your last contact with us, after which it is deleted or anonymised, unless a longer period is required to fulfil applicable legal, regulatory, or business record-keeping requirements.",
+      "In the unlikely event of a personal data breach that is likely to affect you, we will notify the Data Protection Board of India and affected users as required under the Digital Personal Data Protection Act, 2023.",
       "However, no method of electronic transmission or storage is completely secure, and we cannot guarantee absolute security of information transmitted through the internet.",
     ],
   },
@@ -43,13 +44,25 @@ const infoSections = [
     content: [
       "Access and Correction: You may contact us to request information about the personal information you have provided to us or to request correction of inaccurate information.",
       "Data Deletion: You may request deletion of personal information you have provided to us, subject to information that we may be required to retain for legal, regulatory, or legitimate business purposes.",
+      "Withdraw Consent: You may withdraw any consent you have given us at any time, with effect for future processing, by contacting us using the details below.",
       "Opt-Out: If you do not wish to receive further business communications from us, you may contact us directly and request that such communications be discontinued.",
     ],
   },
   {
     title: "Third-Party Involvement",
     content: [
-      "We do not sell your personal information. Information may be disclosed where reasonably necessary to respond to your enquiry, provide requested services, comply with applicable legal requirements, or protect our legal rights and interests.",
+      "We do not sell your personal information. To operate our enquiry form, we use two data processors: Formspree (for receiving and storing enquiry submissions) and UploadThing (for hosting drawings, specifications, and other files you attach to an enquiry). Both providers may process and store your information on servers located outside India. We share information with them only to the extent necessary to receive and respond to your enquiry.",
+      "Information may otherwise be disclosed where reasonably necessary to comply with applicable legal requirements or protect our legal rights and interests.",
+    ],
+  },
+  {
+    title: "Grievance Officer",
+    content: [
+      "In accordance with the Digital Personal Data Protection Act, 2023, we have designated a Grievance Officer to address questions, concerns, or complaints regarding the processing of your personal data:",
+      "Janardan Paul, Founder & Managing Director",
+      "Email: jp190157@gmail.com | Phone: +91-98310 06168",
+      "Address: 51, Purna Chandra Mitra Lane, 2/F, Kolkata 700 033, West Bengal, India",
+      "We will acknowledge grievances within 48 hours of receipt and endeavour to resolve them within 30 days.",
     ],
   },
   {

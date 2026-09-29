@@ -161,7 +161,8 @@ const couplingVariants = (photos: CouplingPhotos) =>
 const RIGID_COUPLING_VARIANTS = couplingVariants({
   blackOxideKeyed: photo("Rigid coupling black oxide with keyway"),
   blackOxidePlain: photo("Black oxide rigid coupling"),
-  stainlessKeyed: photo("Rigid coupling stainless steel with keyway"),
+  /* Delivered as .png, unlike the rest of the client photography. */
+  stainlessKeyed: `${PHOTO_DIR}/Rigid coupling stainless steel with keyway.png`,
   stainlessPlain: photo("Rigid Coupling stainless steel without keyway"),
 });
 
