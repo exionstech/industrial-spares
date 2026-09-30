@@ -109,7 +109,7 @@ const THREADED_BORE_VARIANTS = [
   {
     id: "stainless-steel",
     name: "Single Split - Stainless Steel",
-    image: photo("Threaded bore shaft collar stainless steel"),
+    image: photo("Threaded Bore Shaft Collar Stainless Steel"),
   },
   {
     id: "black-oxide",
