@@ -1,0 +1,209 @@
+- generic [active] [ref=f2e1]:
+  - main [ref=f2e2]:
+    - generic [ref=f2e4]:
+      - link [ref=f2e5] [cursor=pointer]:
+        - /url: /#home
+        - img "INDUSTRIAL SPARES MANUFACTURING COMPANY" [ref=f2e7]
+      - generic [ref=f2e8]:
+        - navigation [ref=f2e9]:
+          - link "Home" [ref=f2e10] [cursor=pointer]:
+            - /url: /
+          - link "About us" [ref=f2e11] [cursor=pointer]:
+            - /url: /about
+          - link "Products" [ref=f2e12] [cursor=pointer]:
+            - /url: /products
+          - link "Quality" [ref=f2e13] [cursor=pointer]:
+            - /url: /about#quality
+        - link "Request A Quote" [ref=f2e14] [cursor=pointer]:
+          - /url: /contact
+    - generic [ref=f2e18]:
+      - generic [ref=f2e19]:
+        - generic [ref=f2e20]:
+          - generic [ref=f2e21]: Get in Touch
+          - heading "Let's build what you need." [level=1] [ref=f2e24]
+          - paragraph [ref=f2e25]: Whether you need a standard component, a repeat production order or a customised machined part, share your requirement with our team.
+        - generic [ref=f2e26]:
+          - img "Turning operation throwing sparks on the machine shop floor" [ref=f2e27]
+          - generic [ref=f2e28]: Precision Engineering & Global Export · Kolkata
+      - generic [ref=f2e30]:
+        - generic [ref=f2e31]:
+          - generic [ref=f2e32]: RFQ & Procurement
+          - heading "Tell us about your requirement." [level=2] [ref=f2e35]
+          - paragraph [ref=f2e36]: Send us your requirements and our team will get back to you with the relevant information, pricing or technical guidance.
+          - generic [ref=f2e37]:
+            - heading "Why Partner With Us?" [level=3] [ref=f2e38]
+            - list [ref=f2e39]:
+              - listitem [ref=f2e40]:
+                - generic [aria-hidden] [ref=f2e41]: ✓
+                - generic [ref=f2e42]: ISO 9001 Quality Management System
+              - listitem [ref=f2e43]:
+                - generic [aria-hidden] [ref=f2e44]: ✓
+                - generic [ref=f2e45]: Customised machined components manufactured to customer-specific requirements.
+        - generic [ref=f2e46]:
+          - heading "Technical Procurement Sheet" [level=2] [ref=f2e47]
+          - paragraph [ref=f2e48]: Please fill in your specifications below. Fields marked with (*) are mandatory.
+          - generic [ref=f2e49]:
+            - generic [ref=f2e50]:
+              - generic [ref=f2e51]: Full Name*
+              - textbox "Full Name*" [ref=f2e53]:
+                - /placeholder: e.g. Rajesh Kumar
+            - generic [ref=f2e54]:
+              - generic [ref=f2e55]: Company Name*
+              - textbox "Company Name*" [ref=f2e57]:
+                - /placeholder: e.g. Apex Engineering Ltd
+            - generic [ref=f2e58]:
+              - generic [ref=f2e59]: Business Email*
+              - textbox "Business Email*" [ref=f2e61]:
+                - /placeholder: e.g. procurement@apex.com
+            - generic [ref=f2e62]:
+              - generic [ref=f2e63]: Phone / WhatsApp
+              - textbox "Phone / WhatsApp" [ref=f2e65]:
+                - /placeholder: e.g. +91 98300 XXXXX
+            - generic [ref=f2e66]:
+              - generic [ref=f2e67]: Country*
+              - button "Country*" [ref=f2e70] [cursor=pointer]:
+                - generic [ref=f2e71]: Select country...
+            - generic [ref=f2e74]:
+              - generic [ref=f2e75]: Product / Requirement*
+              - textbox "Product / Requirement*" [ref=f2e77]:
+                - /placeholder: e.g. 25mm Shaft Collar
+            - generic [ref=f2e78]:
+              - generic [ref=f2e79]: Product Category
+              - button "Product Category" [ref=f2e83] [cursor=pointer]:
+                - generic [ref=f2e84]: Select categories...
+            - generic [ref=f2e87]:
+              - generic [ref=f2e88]: Material / Specification
+              - textbox "Material / Specification" [ref=f2e90]:
+                - /placeholder: e.g. Stainless Steel 304, Carbon Steel
+            - generic [ref=f2e92]:
+              - generic [ref=f2e93]: Quantity / Order Volume
+              - textbox "Quantity / Order Volume" [ref=f2e95]:
+                - /placeholder: e.g. 5,000 units / Monthly repeat
+            - generic [ref=f2e97]:
+              - generic [ref=f2e98]: Message / Detailed Requirements
+              - textbox "Message / Detailed Requirements" [ref=f2e100]:
+                - /placeholder: Specify key dimensional parameters, tolerances, keyways, plating requirements, etc.
+          - generic [ref=f2e102]:
+            - generic [ref=f2e105]: Upload Drawing / Document
+            - generic [ref=f2e106]: PDF / JPG / PNG / CAD - up to 5 files, 16MB each
+            - button "Choose File(s)" [disabled]
+          - generic [ref=f2e108]:
+            - checkbox "I have read and accept the Privacy Policy, and I consent to Industrial Spares Manufacturing Company collecting and processing the information and files submitted above, including sharing them with our form-processing and file-storage providers, to respond to this enquiry." [ref=f2e109]
+            - generic [ref=f2e110]:
+              - text: I have read and accept the
+              - link "Privacy Policy" [ref=f2e111] [cursor=pointer]:
+                - /url: /privacy-policy
+              - text: ", and I consent to Industrial Spares Manufacturing Company collecting and processing the information and files submitted above, including sharing them with our form-processing and file-storage providers, to respond to this enquiry."
+          - button "Send Enquiry" [ref=f2e112] [cursor=pointer]
+      - generic [ref=f2e117]:
+        - generic [ref=f2e118]: Our Locations
+        - heading "Manufacturing from Kolkata. Serving global markets." [level=2] [ref=f2e121]
+        - generic [ref=f2e122]:
+          - list [ref=f2e123]:
+            - listitem [ref=f2e124]:
+              - generic [ref=f2e129]: "Email:"
+              - link "jp190157@gmail.com" [ref=f2e130] [cursor=pointer]:
+                - /url: mailto:jp190157@gmail.com
+            - listitem [ref=f2e131]:
+              - generic [ref=f2e136]: "Telephone:"
+              - link "+91-33-2424 3118" [ref=f2e137] [cursor=pointer]:
+                - /url: tel:+913324243118
+            - listitem [ref=f2e138]:
+              - generic [ref=f2e142]: "Mobile:"
+              - link "+91 98310 06168" [ref=f2e143] [cursor=pointer]:
+                - /url: tel:+919831006168
+            - listitem [ref=f2e144]:
+              - generic [ref=f2e150]: "Fax:"
+              - generic [ref=f2e151]: +91-33-2424 3120
+          - generic [ref=f2e152]:
+            - heading "Head Office" [level=3] [ref=f2e153]
+            - paragraph [ref=f2e154]:
+              - generic [ref=f2e155]: 51, Purna Chandra Mitra Lane, 2/F,
+              - generic [ref=f2e156]: Kolkata - 700 033. INDIA
+          - generic [ref=f2e157]:
+            - heading "Manufacturing Facility" [level=3] [ref=f2e158]
+            - paragraph [ref=f2e159]:
+              - generic [ref=f2e160]: E25/26, RIC Industrial Estate,
+              - generic [ref=f2e161]: Behala 780 Upendra Nath Banerjee Road,
+              - generic [ref=f2e162]: Kolkata - 700 060. INDIA
+      - generic [ref=f2e165]:
+        - iframe [ref=f2e166]
+        - paragraph [ref=f2e167]: Manufacturing Hub
+        - heading "Industrial Spares" [level=3] [ref=f2e168]
+        - paragraph [ref=f2e169]:
+          - generic [ref=f2e170]: E25/26, RIC Industrial Estate,
+          - generic [ref=f2e171]: Behala 780 Upendra Nath Banerjee Road,
+          - generic [ref=f2e172]: Kolkata - 700 060. INDIA
+        - link "Get Directions" [ref=f2e173] [cursor=pointer]:
+          - /url: https://www.google.com/maps/search/?api=1&query=R.I.C+Compound+Kolkata+West+Bengal+India
+      - generic [ref=f2e178]:
+        - generic [ref=f2e179]:
+          - generic [ref=f2e180]: Direct Relationships
+          - heading "A direct line to the people behind the manufacturing." [level=2] [ref=f2e183]
+          - paragraph [ref=f2e184]: At the heart of Industrial Spares is a deeply personal approach to business. Janardan Paul remains personally involved with customers, corresponding with and following up with clients himself, while the team continues to develop new international relationships.
+        - generic [ref=f2e185]:
+          - generic [aria-hidden] [ref=f2e186]: JP
+          - generic [ref=f2e187]:
+            - heading "Janardan Paul" [level=3] [ref=f2e188]
+            - paragraph [ref=f2e189]: Founder & Managing Director
+            - paragraph [ref=f2e190]: Direct Manufacturer Consultation
+    - generic [ref=f2e192]:
+      - generic [ref=f2e193]:
+        - generic [ref=f2e194]:
+          - generic [ref=f2e195]:
+            - img "INDUSTRIAL SPARES MANUFACTURING COMPANY" [ref=f2e197]
+            - generic [ref=f2e198]:
+              - paragraph [ref=f2e199]: INDUSTRIAL SPARES
+              - paragraph [ref=f2e200]: MANUFACTURING CO.
+          - paragraph [ref=f2e201]: Manufacturer and exporter of mechanical power transmission products and precision CNC machined components from India.
+          - generic [ref=f2e202]: EST. 1993 - KOLKATA, INDIA
+        - generic [ref=f2e205]:
+          - heading "Company" [level=4] [ref=f2e206]
+          - list [ref=f2e207]:
+            - listitem [ref=f2e208]:
+              - link "About" [ref=f2e209] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=f2e210]:
+              - link "Products" [ref=f2e211] [cursor=pointer]:
+                - /url: /products
+            - listitem [ref=f2e212]:
+              - link "Quality" [ref=f2e213] [cursor=pointer]:
+                - /url: /about#quality
+            - listitem [ref=f2e214]:
+              - link "Contact" [ref=f2e215] [cursor=pointer]:
+                - /url: /contact
+        - generic [ref=f2e216]:
+          - heading "Products" [level=4] [ref=f2e217]
+          - list [ref=f2e218]:
+            - listitem [ref=f2e219]:
+              - link "Shaft Collars" [ref=f2e220] [cursor=pointer]:
+                - /url: /products/shaft-collars
+            - listitem [ref=f2e221]:
+              - link "Couplings" [ref=f2e222] [cursor=pointer]:
+                - /url: /products/couplings
+            - listitem [ref=f2e223]:
+              - link "CNC Components" [ref=f2e224] [cursor=pointer]:
+                - /url: /products/other-cnc-products
+        - generic [ref=f2e225]:
+          - heading "Socials" [level=4] [ref=f2e226]
+          - list [ref=f2e227]:
+            - listitem [ref=f2e228]:
+              - link "Instagram" [ref=f2e229] [cursor=pointer]:
+                - /url: https://www.instagram.com/industrialsparesmfg
+        - generic [ref=f2e233]:
+          - heading "Address" [level=4] [ref=f2e234]
+          - generic [ref=f2e235]: Kolkata, West Bengal, India
+          - heading "Email" [level=4] [ref=f2e236]
+          - link "jp190157@gmail.com" [ref=f2e237] [cursor=pointer]:
+            - /url: mailto:jp190157@gmail.com
+          - link "Request A Quote" [ref=f2e238] [cursor=pointer]:
+            - /url: /contact
+      - generic [ref=f2e240]:
+        - paragraph [ref=f2e241]: © 2026
+        - paragraph [ref=f2e242]:
+          - text: Developed & Maintained by
+          - link "Exions Tech" [ref=f2e243] [cursor=pointer]:
+            - /url: https://exionstech.online
+        - link "Privacy Policy" [ref=f2e245] [cursor=pointer]:
+          - /url: /privacy-policy
+  - alert [ref=f2e246]

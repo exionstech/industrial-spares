@@ -10,7 +10,6 @@ import { CategoryMultiSelect } from "@/components/contact/CategoryMultiSelect";
 import { CountrySelect } from "@/components/contact/CountrySelect";
 import { Button } from "@/components/ui/button";
 import { PRODUCT_CATEGORIES } from "@/lib/product-catalogue";
-import "@uploadthing/react/styles.css";
 import { UploadDropzone } from "@/lib/uploadthing";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -368,9 +367,10 @@ export const RfqForm: React.FC<RfqFormProps> = ({ countries }) => {
         <UploadDropzone
           appearance={{
             container: "rounded-none border border-dashed border-[#9ca3af] bg-transparent py-6",
+            uploadIcon: "h-10 w-10 text-[#9ca3af]",
             label: "text-brand-dark text-sm uppercase tracking-[0.08em]",
             allowedContent: "text-[#4a4a4a] text-sm",
-            button: "rounded-none bg-brand-red text-sm",
+            button: "rounded-none bg-brand-red text-sm w-auto px-8 cursor-pointer",
           }}
           content={{
             label: "Upload Drawing / Document",
